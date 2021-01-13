@@ -1,0 +1,109 @@
+// 검색어 @에 대한 #건의 검색 결과입니다. 문자 처리
+const replaceString = {
+    fetch(relanguage, sortdata, data, replaceword) {
+        if (Object.keys(relanguage).length > 0) {
+            // 건수 변환
+            var cnt = 0;
+            if (!(sortdata.total_cnt == undefined)) {
+                cnt = sortdata.total_cnt;
+            }
+            relanguage.searchresult =
+                relanguage.searchresult.replace(new RegExp(replaceword.count), cnt);
+            // 검색어 변환
+            var rereplace = '&quot; &quot;';
+            if (relanguage.searchresult.indexOf('&quot; &quot;') == -1) {
+                rereplace = `&quot;${replaceword.word}&quot;`;
+            }
+            relanguage.searchresult =
+                relanguage.searchresult.replace(new RegExp(rereplace), `&quot;${data.searchword}&quot;`);
+        }
+        return relanguage;
+
+    }
+}
+import config from '../config.json';
+export default {
+    // 검색
+    ResearchCheck(state, checked) {
+        state.data.check = checked;
+    },
+    SearchData(state, { res, word, replaceword, what, whatfield, page, size }) {
+        console.log('********************FilterSortData')
+        console.log(res);
+
+        var result = {};
+
+        if (typeof res === 'string') {
+            result.total_cnt = 0;
+        } else {
+            result = res;
+        }
+
+        var data = state.data;
+        if (word !== undefined && page !== undefined) {
+            data.searchword = word;
+            data.pagenum = page;
+            // data fetch
+            state.data.searchwordarr.push(word);
+            state.data.searchword = word;
+            state.data.pagenum = page;
+            state.nowpage = config.defaultNowPage;
+            state.data.pagenum = config.defaultPageNum - 1;
+        }
+        else if (what !== undefined && whatfield !== undefined) {
+            data[whatfield] = what;
+            // data fetch
+            state.data[whatfield] = what;
+            state.nowpage = config.defaultNowPage;
+            state.data.pagenum = config.defaultPageNum - 1;
+        }
+        else if (page !== undefined && size !== undefined) {
+            state.data.pagenum = page;
+            state.data.size = size;
+        }
+        // language별 String을 replace 시켜줄 데이터 바인딩 
+        var sortdata = result;
+        var replace = state.replaceword;
+        // 새로운 데이터 별 바뀐 language
+        var relanguage = replaceString.fetch(state.language, sortdata, data, replace);
+        console.log(relanguage);
+        // data fetch
+        state.sortdata = result;
+
+        // state.nowpage = 1;
+        state.language = relanguage;
+        state.replaceword.word = replaceword;
+        state.replaceword.count = result.total_cnt;
+        // page 계산
+        // 마지막페이지-1
+        var settotalpage = parseInt(result.total_cnt / config.defaultSize);
+        state.totalpage = settotalpage;
+        // 마지막페이지 객체수
+        state.remainder = result.total_cnt % config.defaultSize;
+        // 마지막 디스플레이 객체수
+        state.perpage = settotalpage % state.perpagecnt;
+        console.log(state.perpage, "perpage");
+        console.log(settotalpage, "settotalpage");
+        // 총 디스플레이 페이지수
+        state.totalperpagecnt = parseInt(settotalpage / state.perpagecnt);
+    },
+    BigCategory(state, { res, category }) {
+        state.sortdata = res.data;
+        state.data.index = category;
+        state.data.pagenum = config.defaultPageNum - 1;
+        state.data.size = config.defaultSize;
+        state.nowpage = config.defaultNowPage;
+    },
+    // 다국어
+    LanguageData(state, { data }) {
+        state.language = data;
+    },
+    // 페이지
+    PageNum(state, { page, size }) {
+        state.data.pagenum = page - 1;
+        state.data.size = size;
+    },
+    NowPageChange(state, change) {
+        state.nowpage = change;
+    },
+}

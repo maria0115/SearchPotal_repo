@@ -1,0 +1,170 @@
+@charset "utf-8";
+/* --------------------------------------------------
+* Version	: 1.0
+* Date		: 2020.09
+* Author	: SangKi Park / pak81@saerom.co.kr, seon81.park@gmail.com
+\* -------------------------------------------------- */
+
+
+/** Common
+===================================*/
+.highlight {color:#7baf18}
+
+/* Datepicker */
+.ui-datepicker {margin-top:-28px;margin-left:142px;border:1px solid #e4e4e4;width:196px;background:#fff;z-index:-1}
+.ui-datepicker-header {position:relative;border-bottom:1px solid #ececec;padding:10px 0 6px}
+.ui-datepicker-header a {position:absolute;top:13px;width:13px;height:13px;cursor:pointer}
+.ui-datepicker-header a .ui-icon {overflow:hidden !important;clip:rect(1px, 1px, 1px, 1px) !important;position:absolute !important;width:1px !important;height:1px !important}
+.ui-datepicker-header a.ui-datepicker-prev {left:8px;background:url(../images/ico_datepicker_prev.png) no-repeat center center}
+.ui-datepicker-header a.ui-datepicker-next {right:8px;background:url(../images/ico_datepicker_next.png) no-repeat center center}
+.ui-datepicker-header .ui-datepicker-title {font-size:15px;line-height:19px;font-weight:700;color:#0f0f0f;text-align:center}
+.ui-datepicker-calendar {table-layout:fixed;width:100%}
+.ui-datepicker-calendar th,
+.ui-datepicker-calendar td {font-size:12px;text-align:center}
+.ui-datepicker-calendar thead th {border-bottom:1px solid #f5f5f5;height:28px;background:#f8f8f8;color:#000}
+.ui-datepicker-calendar tbody td {height:20px;color:#acacac}
+.ui-datepicker-calendar .ui-datepicker-today {font-weight:700;color:#666;text-decoration:underline}
+.ui-datepicker-calendar .ui-datepicker-current-day {background:#8cc819;color:#fff}
+
+/* Pagination */
+.pagination {text-align:center}
+.pagination ul {display:inline-block;vertical-align:top}
+.pagination li {float:left}
+.pagination li .link {display:block;padding:0 11px;height:28px;font-size:16px;line-height:28px;font-weight:500;color:#666;text-align:center}
+.pagination li .btn {display:block;margin:0 2px;border:1px solid #d7d7d7;width:60px;font-size:15px;line-height:26px;font-weight:500;color:#666;text-align:center}
+.pagination li .btn:hover {color:#86b536}
+.pagination li.on a {font-weight:700;color:#86b536;cursor:default}
+
+
+/** Layout
+===================================*/
+.page {position:relative;min-width:1280px;z-index:1}
+.pageContainer {display:flex;position:relative}
+.pageContainer .pageContent {flex:1;border-right:1px solid #e1e3e9;padding:0 30px 30px}
+.pageContainer .pageAside {width:290px}
+
+/* Search Area */
+.searchArea {padding:34px 0 31px;text-align:center}
+.searchArea > div {display:inline-block;text-align:left;vertical-align:top}
+.searchBox {position:relative}
+.searchBox .keyword {overflow:hidden;border:2px solid #8cc819;border-radius:23px;width:452px}
+.searchBox .keyword input {border:0;padding:0 42px 0 24px;width:100%;height:42px;font-size:16px;font-weight:500;color:#302a2a}
+.searchBox .btnSearch {position:absolute;top:50%;right:18px;margin-top:-12px;width:24px;height:24px;background:url(../images/ico_search_b.png) no-repeat}
+.searchBox .acKeywordBox {display:none;position:absolute;top:100%;left:0;margin-top:-4px;border:2px solid #8cc819;border-top:0;border-radius:0 0 23px 23px;padding:0 12px;width:452px;background:#fff;z-index:1}
+.searchBox .acKeywordBox ul {border-top:1px solid #e1e3e9;padding:0 12px 12px;font-size:16px;line-height:36px;font-weight:500;color:#302a2a}
+.searchBox.on .keyword {border-radius:23px 23px 0 0}
+.searchBox.on .acKeywordBox {display:block}
+.searchOption {margin-left:8px;padding:10px 0}
+.searchOption .txt {display:block;padding-left:24px;font-size:15px;line-height:26px;color:#000;background:url(../images/ico_check.png) no-repeat left center;cursor:pointer}
+.searchOption :checked + .txt {background:url(../images/ico_check_g_on.png) no-repeat left center}
+
+/* Local Navigation Bar */
+.lnb {padding:18px 20px 17px;border-top:1px solid #e1e3e9;border-bottom:1px solid #e1e3e9}
+.lnbMenu {display:inline-block;vertical-align:top}
+.lnbMenu ul {overflow:hidden}
+.lnbMenu li {float:left;margin:0 26px;border-bottom:3px solid transparent}
+.lnbMenu li a {display:block;padding:0 6px;font-size:18px;line-height:36px;font-weight:700;color:#000;text-align:center}
+.lnbMenu li.on {border-color:#8cc819}
+.lnbMore {display:inline-block;margin:0 26px;vertical-align:top}
+.lnbMore .dropdown-toggle {display:block;padding:0 30px 0 6px;font-size:18px;line-height:36px;font-weight:700;color:#000;text-align:center;background:url(../images/ico_dropdown_g.png) no-repeat right 6px center}
+.lnbMore .dropdown-menu {margin-top:20px;border:1px solid #e1e3e9;padding:6px 0;min-width:130px;-webkit-box-shadow:none;box-shadow:none}
+.lnbMore .dropdown-menu li a {padding-left:44px;font-size:16px;line-height:30px;color:#666}
+.lnbMore .dropdown-menu li.on a {color:#86b536;background:url(../images/ico_checked_g.png) no-repeat 21px 12px}
+
+/* Footer */
+.pageFooter {border-top:1px solid #e8e8e8;background:#fff}
+.pageFooter .copyright {height:41px;font-size:10px;line-height:41px;color:#999;letter-spacing:0.025em;text-align:center}
+
+
+/** Content
+===================================*/
+.resultMessage {padding:30px 0;font-size:18px;line-height:24px;color:#000;text-align:center}
+
+/* Common */
+.resultSection {position:relative;margin-top:24px}
+.resultSection .title {padding:9px 0;font-size:16px;line-height:22px;font-weight:700;color:#252525}
+.resultSection .title .cnt {display:inline-block;margin-top:1px;border:1px solid #d2d2d2;border-radius:10px;padding:0 6px;font-size:13px;line-height:18px;color:#7baf18;text-align:center;vertical-align:top}
+.resultSection .boardTitle {border-bottom:2px solid #8cc819;padding:9px 0;font-size:19px;line-height:22px;font-weight:700;color:#333}
+.resultSection .boardList {margin-top:4px}
+.resultSection .boardList li {padding:10px 0}
+.resultSection .boardList li a {display:block;position:relative;padding:8px 36px}
+.resultSection .boardList li a > span {overflow:hidden;display:block;font-weight:500}
+.resultSection .boardList li .location {font-size:13px;line-height:20px;color:#7baf18}
+.resultSection .boardList li .subject {font-size:16px;line-height:30px;font-weight:700;color:#252525}
+.resultSection .boardList li .write {font-size:13px;line-height:20px;color:#575757}
+.resultSection .boardList li .write .date {font-size:12px;color:#787878}
+.resultSection .boardList li .content {text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-wrap:break-word;margin-top:10px;max-height:40px;font-size:14px;line-height:20px;color:#252525}
+.resultSection .boardList li .attch {position:absolute;top:33px;left:9px;width:20px;height:20px;background:url(../images/ico_attch_g.png) no-repeat}
+.resultSection .btnMore {display:block;position:absolute;top:9px;right:15px;padding-right:16px;font-size:13px;line-height:26px;color:#575757;background:url(../images/ico_more_g.png) no-repeat center right}
+.resultSection .pagination {margin-top:24px}
+
+/* 검색필터 */
+.filterArea {border:1px solid #efefef;padding:25px 16px;background:#f6f6f6}
+.filterArea:after {content:'';display:table;clear:both}
+.filterItem {float:left;position:relative;padding:0 12px}
+.filterItem .btnToggle {display:block;padding-right:20px;font-size:14px;line-height:24px;font-weight:500;color:#666;background:url(../images/ico_desc_g.png) no-repeat right 1px center}
+.filterItem .toggleBox {display:none;position:absolute;top:100%;left:0;margin-top:6px;border:1px solid #efefef;padding:7px;width:154px;background:#fff;z-index:1}
+.filterItem .toggleBox li > a {display:block;padding-left:30px;font-size:14px;line-height:30px;color:#666}
+.filterItem .toggleBox li.on > a {color:#86b536;background:url(../images/ico_checked_g.png) no-repeat 10px 11px}
+.filterItem.active .btnToggle {background:url(../images/ico_asc_g.png) no-repeat right 1px center}
+.filterItem.active .toggleBox {display:block}
+.filterItem .datepickerArea {display:none}
+.filterItem .datepickerBox {margin-bottom:6px}
+.filterItem .datepickerBox input {border:1px solid #efefef;padding:0 24px 0 8px;width:100%;height:28px;background:url(../images/ico_datepicker.png) no-repeat right 6px center;vertical-align:top}
+.filterItem .datepickerArea .btnSubmit {display:block;border-radius:3px;font-size:14px;line-height:26px;font-weight:500;color:#fff;text-align:center;background:#8cc819}
+
+/* 임직원 */
+.employeeList {overflow:hidden;border-bottom:1px solid #f0f0f0;padding:12px 0 38px}
+.employeeList li {float:left;width:25%;text-align:center}
+.employeeList li a {display:inline-block;position:relative;padding:9px 8px 9px 82px;text-align:left;vertical-align:top}
+.employeeList li a > span {display:block}
+.employeeList li .thumb {overflow:hidden;position:absolute;top:0;left:0;border:1px solid #e8e8e8;border-radius:50%;width:74px;height:74px;background:#e8e8e8}
+.employeeList li .name.kor {font-size:14px;line-height:20px;font-weight:700;color:#252525}
+.employeeList li .name.eng {font-size:13px;line-height:18px;color:#252525}
+.employeeList li .team {font-size:13px;line-height:18px;color:#575757}
+
+/* 부서 */
+.departmentList {overflow:hidden;margin:0 -6px;padding-top:14px}
+.departmentList li {float:left;padding:0 6px;width:25%}
+.departmentList li a {display:block;position:relative;border:1px solid #f0f0f0;padding:0 22px;height:104px;font-size:13px;line-height:18px;color:#575757}
+.departmentList li a > span {display:block}
+.departmentList li .dept {padding:12px 0 8px;font-size:14px;line-height:20px;font-weight:700;color:#252525}
+.departmentList li .dept:before {content:'';display:block;position:absolute;top:18px;left:10px;border-radius:50%;width:6px;height:6px;background:#8cc819}
+
+
+/** Aside
+===================================*/
+/* Common */
+.pageAside {padding:4px 20px 20px}
+.pageAside .asideSection {position:relative}
+.pageAside .asideSection h2 {padding:22px 0;font-size:18px;line-height:28px;font-weight:700;color:#000}
+.pageAside .asideSection .tabMenu {overflow:hidden;position:absolute;top:22px;right:0;border:1px solid #efefef}
+.pageAside .asideSection .tabMenu li {float:left}
+.pageAside .asideSection .tabMenu li a {display:block;width:68px;font-size:14px;line-height:26px;color:#6f6f6f;text-align:center}
+.pageAside .asideSection .tabMenu li.on a {background:#a3d430;color:#fff}
+
+/* 연관검색어 */
+.relatedList {border-top:1px solid #f0f0f0}
+.relatedList li {position:relative;padding-right:36px;border-bottom:1px solid #f0f0f0}
+.relatedList .keyword {display:block;padding-left:8px;font-size:15px;line-height:36px;color:#333}
+.relatedList .btnDel {display:block;position:absolute;top:0;right:0;width:36px;height:36px;background:url(../images/ico_del_g.png) no-repeat center center}
+
+/* 인기검색어 */
+.popularList {border-top:1px solid #f0f0f0}
+.popularList li {position:relative;border-bottom:1px solid #f0f0f0}
+.popularList li a {display:block;font-size:14px;line-height:36px;color:#333}
+.popularList li .num {display:inline-block;margin-right:4px;width:32px;font-weight:700;color:#999;text-align:center;vertical-align:top}
+.popularList li em.num {color:#8cc819}
+
+
+/** 임직원정보
+===================================*/
+.resultSection .empInfoTitle {border-bottom:2px solid #8cc819;padding:9px 0;font-size:19px;line-height:22px;font-weight:700;color:#333}
+.resultSection .empInfoList {overflow:hidden;padding:70px 32px 0}
+.resultSection .empInfoList li {float:left;position:relative;padding-left:98px;width:50%;height:168px;font-size:13px;line-height:24px;color:#575757;word-break:break-all}
+.resultSection .empInfoList .profile {position:absolute;top:0;left:0;width:98px}
+.resultSection .empInfoList .profile .thumb {overflow:hidden;margin:0 auto;border:1px solid #e8e8e8;border-radius:50%;width:74px;height:74px;background:#e8e8e8}
+.resultSection .empInfoList .profile .name {font-size:15px;line-height:32px;color:#252525;font-weight:700;text-align:center}
+.resultSection .empInfoList div span {display:inline-block;position:relative;padding-left:11px;vertical-align:top}
+.resultSection .empInfoList div span:before {content:'';display:block;position:absolute;top:9px;left:0;border-radius:50%;width:6px;height:5px;background:#8cc819}
+.resultSection .empInfoList div span:first-child {margin-right:18px}
