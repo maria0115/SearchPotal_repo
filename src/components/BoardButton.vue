@@ -8,10 +8,9 @@
     >
       <router-link
         :to="`/board/approval/page?page=${index + (nowpage - 1) * perpagecnt}`"
+        class="link"
       >
-        <a href="#" class="link">
-          <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
-        </a>
+        <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
       </router-link>
     </li>
     <!-- ### 활성화 메뉴 클래스 "on" 추가 ### -->

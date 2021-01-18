@@ -1,31 +1,34 @@
 <template>
   <div class="pageContainer">
-    <spinner :loading="loading"></spinner>
     <div class="pageContent">
       <section class="resultSection">
-        <h2 class="boardTitle">{{ language[category] }}</h2>
-        <ul class="boardList">
-          <!-- <router-view></router-view> -->
+        <h2 class="empInfoTitle">{{ language.person }}</h2>
+        <ul class="empInfoList">
           <span v-if="this.sortdata.category">
-            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li
               v-for="(data, index) in sortdata.category.approval"
               :key="index"
             >
               <router-link :to="`/detail/${index}`">
-                <a href="#">
-                  <span class="location">{{ data.from }}</span>
-                  <span class="subject">{{ data.subject }}</span>
-                  >
-                  <span class="write"
-                    >안지원 매니저 / 전략구매팀
-                    <span class="date">{{ data.created }}</span></span
-                  >
-                  <span class="content">{{ data.body }}</span>
-                  <span class="attch"
-                    ><span class="hidden">첨부파일</span></span
-                  >
-                </a>
+                <div class="profile">
+                  <div class="thumb">
+                    <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
+                  </div>
+                  <div class="name kor">안지원 {{ data.author }}</div>
+                </div>
+                <div class="dept">게임빌컴투스 플랫폼/플랫폼 총괄 {{ data.author }}</div>
+                <div class="pos">
+                  <span>직급: 과장</span> <span>직책: 총괄</span>
+                </div>
+                <div class="contact">
+                  <span>회사: 02-256-1234</span>
+                  <span>휴대폰: 010-1234-5678</span>
+                </div>
+                <div class="contact">
+                  <span>자택: 02-654-7894</span>
+                  <span>E-mail: admin@gamevill.co.kr</span>
+                </div>
+                <div class="work"><span>담당업무: 기획/마케팅</span></div>
               </router-link>
             </li>
           </span>
@@ -96,6 +99,7 @@ import { mapState } from "vuex";
 import config from "../config.json";
 import Spinner from "./Spinner.vue";
 import bus from "../utils/bus.js";
+
 export default {
   computed: {
     ...mapState({

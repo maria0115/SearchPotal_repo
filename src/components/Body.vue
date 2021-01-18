@@ -2,7 +2,7 @@
   <div class="pageContainer">
     <div class="pageContent">
       <section class="resultSection">
-        <h2 class="title">임직원 <span class="cnt">92</span></h2>
+        <h2 class="title">{{ language.person }} <span class="cnt">92</span></h2>
         <ul class="employeeList">
           <li>
             <a href="#">
@@ -15,7 +15,7 @@
             </a>
           </li>
         </ul>
-        <a href="#" class="btnMore">MORE</a>
+        <router-link :to="`/person/person`" class="btnMore"> MORE </router-link>
       </section>
       <section class="resultSection">
         <h2 class="title">부서 <span class="cnt">52</span></h2>
@@ -28,10 +28,10 @@
             </a>
           </li>
         </ul>
-        <a href="#" class="btnMore">MORE</a>
+        <!-- <a href="#" class="btnMore">MORE</a> -->
       </section>
       <section class="resultSection">
-        <h2 class="boardTitle">전자결재</h2>
+        <h2 class="boardTitle">{{ language.approval }}</h2>
         <ul class="boardList">
           <li>
             <a href="#">
@@ -52,11 +52,12 @@
             </a>
           </li>
         </ul>
-        <router-link :to="`/board/approval`">
-        <a href="#" class="btnMore">MORE</a></router-link>
+        <router-link :to="`/board/approval`" class="btnMore">
+          MORE
+        </router-link>
       </section>
       <section class="resultSection">
-        <h2 class="boardTitle">게시판</h2>
+        <h2 class="boardTitle">{{ language.board }}</h2>
         <ul class="boardList">
           <li>
             <a href="#">
@@ -75,22 +76,27 @@
             </a>
           </li>
         </ul>
-        <a href="#" class="btnMore">MORE</a>
+        <router-link :to="`/board/board`" class="btnMore"> MORE </router-link>
       </section>
     </div>
 
     <PageSide></PageSide>
-
   </div>
 </template>
 
 <script>
-import PageSide from './PageSide'
+import PageSide from "./PageSide";
+import { mapState } from "vuex";
 
 export default {
-    components: {
-        PageSide
-    }
+  components: {
+    PageSide,
+  },
+  computed: {
+    ...mapState({
+      language: (state) => state.language,
+    }),
+  },
 };
 </script>
 

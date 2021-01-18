@@ -16,9 +16,11 @@ export const store = new VueX.Store({
             searchwordarr: [],
             accOrrec: config.what[0],
             aOrd: config.defaultSort,
-            index: '_all',
+            class: 'all',
             pagenum: 0,
             check: false,
+            dateType: "",
+            gte: [],
         },
         //다국어
         language: {},

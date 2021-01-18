@@ -19,9 +19,7 @@
             v-model="searchname"
           />
         </div>
-        <button type="submit" class="btnSearch" @click="btnSearch">
-          <span>검색</span>
-        </button>
+        <button type="submit" class="btnSearch" @click="btnSearch"></button>
         <div class="acKeywordBox">
           <ul>
             <li>
@@ -49,19 +47,33 @@
     <div class="lnb">
       <div class="lnbMenu">
         <ul>
-          <li
-            :class="{ on: CategoryOn('_all') }"
-            @click="CategoryBtn('_all')"
-          >
-            <router-link :to="`/_all`">
+          <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
+            <router-link :to="`/all`">
               {{ language.allsearch }}
             </router-link>
           </li>
-          <li 
-          :class="{ on: CategoryOn('approval') }"
-          @click="CategoryBtn('approval')">
+          <li
+            :class="{ on: CategoryOn('approval') }"
+            @click="CategoryBtn('approval')"
+          >
             <router-link :to="`/board/approval`">
               {{ language.approval }}
+            </router-link>
+          </li>
+          <li
+            :class="{ on: CategoryOn('board') }"
+            @click="CategoryBtn('board')"
+          >
+            <router-link :to="`/board/board`">
+              {{ language.board }}
+            </router-link>
+          </li>
+          <li
+            :class="{ on: CategoryOn('person') }"
+            @click="CategoryBtn('person')"
+          >
+            <router-link :to="`/person/person`">
+              {{ language.person }}
             </router-link>
           </li>
         </ul>
@@ -82,22 +94,48 @@
       <div class="filterItem">
         <a class="btnToggle">모든 날짜</a>
         <ul class="toggleBox">
-          <li class="on"><a @click="SortBtn('allday', '2')">모든 날짜</a></li>
-          <li><a>지난 1시간</a></li>
-          <li><a>지난 1일</a></li>
-          <li><a>지난 1주</a></li>
-          <li><a>지난 1개월</a></li>
-          <li><a>지난 1년</a></li>
+          <li class="on">
+            <a @click="SortBtn('allday', 'dateType')">모든 날짜</a>
+          </li>
+          <li>
+            <a @click="SortBtn('ago', 'dateType', 'now-1h/s')">지난 1시간</a>
+          </li>
+          <li>
+            <a @click="SortBtn('season', 'dateType', 'now-1d/d')">지난 1일</a>
+          </li>
+          <li>
+            <a @click="SortBtn('season', 'dateType', 'now-7d/d')">지난 1주</a>
+          </li>
+          <li>
+            <a @click="SortBtn('season', 'dateType', 'now-1M/d')">지난 1개월</a>
+          </li>
+          <li>
+            <a @click="SortBtn('season', 'dateType', 'now-7y/d')">지난 1년</a>
+          </li>
           <li>
             <a class="btnPeriod">기간 설정</a>
             <div class="datepickerArea">
               <div class="datepickerBox">
-                <input type="text" class="datepicker" />
+                <input
+                  type="text"
+                  class="datepicker"
+                  id="datepicker1"
+                  v-model="startDate"
+                  placeholder="MM/DD/YYYY"
+                />
               </div>
               <div class="datepickerBox">
-                <input type="text" class="datepicker" />
+                <input
+                  type="text"
+                  class="datepicker"
+                  id="datepicker2"
+                  v-model="endDate"
+                  placeholder="MM/DD/YYYY"
+                />
               </div>
-              <a class="btnSubmit">적용</a>
+              <a class="btnSubmit" @click="SortBtn('custom', 'dateType')"
+                >적용</a
+              >
             </div>
           </li>
         </ul>
@@ -139,6 +177,8 @@ export default {
   data() {
     return {
       searchname: "",
+      startDate: "",
+      endDate: "",
     };
   },
   methods: {
@@ -153,13 +193,36 @@ export default {
     CategoryBtn(category) {
       this.$store.dispatch("BigCategory", category);
     },
-    SortBtn(it, fieldname) {
+    SortBtn(it, fieldname, whatDate) {
       var id = this.$route.params.id;
+
+      var moment = require("moment");
+      // moment().format("YYYY-MM-DD HH:mm:ss Z");
+      if (it == "custom") {
+        if (this.startDate == "") {
+          this.startDate = $("input#datepicker1").datepicker().val();
+          this.startDate = moment(this.startDate).format("YYYYMMDD");
+        }
+        if (this.endDate == "") {
+          this.endDate = $("input#datepicker2").datepicker().val();
+          this.endDate = moment(this.endDate).add(1, "days").format("YYYYMMDD");
+        }
+
+        if (this.startDate != "" && this.endDate != "") {
+          var dateArr = [this.startDate, this.endDate];
+          whatDate = dateArr;
+        }
+      }
+
       this.$store.dispatch("FilterData", {
         what: it,
         whatfield: fieldname,
         category: id,
+        gte: whatDate,
       });
+
+      this.startDate = "";
+      this.endDate = "";
     },
     ChangeLanguage(e) {
       console.log(e.target.value);
@@ -170,6 +233,32 @@ export default {
       var checked = e.target.checked;
       this.$store.commit("ResearchCheck", checked);
     },
+    // dateFilter() {
+    //   var moment = require("moment"); // moment 모듈불러오기
+
+    //   var now = moment(); //오늘
+    //   var now = moment("2020-01-01"); //특정일 셋팅
+    //   console.log("ffffffffffffffff", now._d);
+
+    //   //moment().add(number,String); 추가
+    //   //moment().subtract(number,String); 빼기
+
+    //   var tomorrow = moment().add(1, "days"); //내일
+    //   var yesterday = moment().subtract(1, "days"); //어제
+    //   var addMonth = moment().add(1, "months"); //한달 뒤
+    //   var subMonth = moment().subtract(1, "months"); //한달 전
+    //   var addYear = moment().add(1, "years"); //일년 뒤
+    //   var subYear = moment().subtract(1, "years"); //일년 전
+
+    //   moment().format("YYYY-MM-DD HH:mm:ss Z");
+    //   console.log("now ", now.format());
+    //   console.log("tomorrow ", tomorrow.format());
+    //   console.log("yesterday ", yesterday);
+    //   console.log("addMonth ", addMonth);
+    //   console.log("subMonth ", subMonth);
+    //   console.log("addYear ", addYear);
+    //   console.log("subYear ", subYear);
+    // },
   },
   computed: {
     ...mapState({
@@ -179,7 +268,8 @@ export default {
     }),
   },
   created() {
-    this.$store.dispatch("LanguageFetchData", "");
+    // this.$store.dispatch("LanguageFetchData", "");
+    this.$store.dispatch("LanguageFetchData", "ko");
   },
 };
 </script>

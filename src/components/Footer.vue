@@ -1,5 +1,5 @@
 <template>
   <footer class="pageFooter">
-        <p class="copyright">COPYRIGHT © 2019 GAMEVIL COM2US PLATFORM Inc. All Right Reserved.</p>
+        <p class="copyright">COPYRIGHT © SAEROM INFORMATION SYSTEMS, INC. ALL RIGHTS RESERVED</p>
   </footer>
 </template>

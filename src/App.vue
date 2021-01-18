@@ -2,30 +2,38 @@
   <div id="app">
     <div class="page">
       <Header></Header>
-      <router-view/>
+      <router-view />
     </div>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-import test1 from './js/jquery.js'
-import test2 from './js/jquery-ui.js'
-import test3 from './portal/js/test2.js'
-import test4 from './portal/js/test.js'
-import Header from './components/Header'
-import Body from './components/Body'
-import Footer from './components/Footer'
+import test1 from "./js/jquery.js";
+import test2 from "./js/jquery-ui.js";
+import test3 from "./portal/js/test2.js";
+import test4 from "./portal/js/test.js";
+import Header from "./components/Header";
+import Body from "./components/Body";
+import Footer from "./components/Footer";
+import Person from "./components/Person";
+import config from './config.json'
 
 export default {
-  name: 'App',
-  components:{
+  name: "App",
+  components: {
     Header,
     Body,
-    Footer
-  }
-}
-
+    Footer,
+    Person,
+  },
+  created() {
+    var date = new Date();
+    date.getTimezoneOffset();
+    config.timezone = date.getTimezoneOffset();
+    console.log("111111111111111", config.timezone);
+  },
+};
 </script>
 
 <style>

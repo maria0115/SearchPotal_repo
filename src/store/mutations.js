@@ -89,7 +89,7 @@ export default {
     },
     BigCategory(state, { res, category }) {
         state.sortdata = res.data;
-        state.data.index = category;
+        state.data.class = category;
         state.data.pagenum = config.defaultPageNum - 1;
         state.data.size = config.defaultSize;
         state.nowpage = config.defaultNowPage;
