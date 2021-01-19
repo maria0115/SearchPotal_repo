@@ -1,21 +1,32 @@
 import { GetLanguage, Search } from '../api/index.js';
 import config from '../config.json';
 export default {
+    // 헤더에 있는 메뉴 클릭시 카테고리 변경
     BigCategory({ state, commit }, category) {
         console.log('bigcategory', category);
         var data = state.data;
         data.pagenum = config.defaultPageNum - 1;
-        data.size = config.defaultSize;
+        if (category == "all") {
+            data.size = config.defaultHomeSize;
+        } else {
+            data.size = config.defaultSize;
+        }
         data.class = category;
 
+        commit('setTime');
 
-        console.log('fffffffffff111 ' , data );
+        console.log('fffffffffff111 ', data);
 
         return Search(data)
             .then(response => {
                 commit('BigCategory', { res: response, category: category });
             });
     },
+    // 카테고리
+    setClass({ state, commit }, className) {
+        state.data.class = className;
+    },
+    //검색
     SearchWord({ state, commit }, { word }) {
         console.log(state.sortdata.total_cnt, "****************searchword");
         var data = state.data;
@@ -26,12 +37,15 @@ export default {
                 data.searchwordarr.push(word);
             } else {
                 data.searchwordarr = [];
+                data.searchwordarr.push(word);
             }
         }
         var pagenum = config.defaultPageNum - 1;
         data.pagenum = pagenum;
 
-        console.log('fffffffffff222 ' , data );
+        commit('setTime');
+
+        console.log('fffffffffff222 ', data);
 
         return Search(data)
             .then(response => {
@@ -39,12 +53,26 @@ export default {
             });
 
     },
+    // 필터 선택시
     FilterData({ commit, state }, { what, whatfield, gte }) {
         var data = state.data;
-        data[whatfield] = what;
-        data.gte = gte;
 
-        console.log('fffffffffff333 ' , data );
+        if (data.class == "all") {
+            data.size = config.defaultHomeSize;
+        } else {
+            data.size = config.defaultSize;
+        }
+
+        data[whatfield] = what;
+        if (typeof gte == "undefined" || typeof gte == undefined || gte == null || gte == "") {
+            console.log('wwwwwwwwwwww ', data.gte);
+        } else {
+            data.gte = gte;
+        }
+
+        commit('setTime');
+
+        console.log('fffffffffff333 ', data);
 
         return Search(data)
             .then(response => {
@@ -52,6 +80,7 @@ export default {
             });
 
     },
+    // 페이지
     PageSearch({ commit, state }, { page, size }) {
         var data = state.data;
         data.pagenum = page;
@@ -60,7 +89,9 @@ export default {
         console.log(page, size);
         console.log(data);
 
-        console.log('fffffffffff444 ' , data );
+        commit('setTime');
+
+        console.log('fffffffffff444 ', data);
 
         return Search(data)
             .then(response => {
@@ -83,7 +114,7 @@ export default {
         data.searchword = getdata.searchword;
         console.log(data, "language");
 
-        console.log('ffffffffffflanguage ' , data );
+        console.log('ffffffffffflanguage ', data);
 
         return GetLanguage(data)
             .then(response => {

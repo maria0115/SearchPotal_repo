@@ -4,31 +4,29 @@
       <section class="resultSection">
         <h2 class="empInfoTitle">{{ language.person }}</h2>
         <ul class="empInfoList">
-          <span v-if="this.sortdata.category">
-            <li
-              v-for="(data, index) in sortdata.category.approval"
-              :key="index"
-            >
+          <span v-if="this.sortdata.length > 0">
+            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+            <li v-for="(data, index) in sortdata" :key="index">
               <router-link :to="`/detail/${index}`">
                 <div class="profile">
                   <div class="thumb">
                     <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
                   </div>
-                  <div class="name kor">안지원 {{ data.author }}</div>
+                  <div class="name kor">{{ sortdata[index].subject }}</div>
                 </div>
-                <div class="dept">게임빌컴투스 플랫폼/플랫폼 총괄 {{ data.author }}</div>
+                <div class="dept">{{ sortdata[index].dept }}</div>
                 <div class="pos">
-                  <span>직급: 과장</span> <span>직책: 총괄</span>
+                  <span>직급: {{ sortdata[index].body.jobTitle }}</span> <span>직책: {{ sortdata[index].body.jobPosition}}</span>
                 </div>
                 <div class="contact">
-                  <span>회사: 02-256-1234</span>
-                  <span>휴대폰: 010-1234-5678</span>
+                  <span>회사:  {{ sortdata[index].body.company }}</span>
+                  <span>휴대폰:  {{ sortdata[index].body.phone }}</span>
                 </div>
                 <div class="contact">
-                  <span>자택: 02-654-7894</span>
-                  <span>E-mail: admin@gamevill.co.kr</span>
+                  <span>자택:  {{ sortdata[index].body.tel }}</span>
+                  <span>E-mail: {{ sortdata[index].body.email }}</span>
                 </div>
-                <div class="work"><span>담당업무: 기획/마케팅</span></div>
+                <div class="work"><span>담당업무: {{ sortdata[index].body.job }}</span></div>
               </router-link>
             </li>
           </span>
@@ -40,14 +38,14 @@
             <span v-if="!(this.nowpage == 1)">
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'first'}`"
+                  :to="`/person/person/page?name=${'first'}`"
                   class="btn btnPrev"
                   >처음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'prev'}`"
+                  :to="`/person/person/page?name=${'prev'}`"
                   class="btn btnPrev"
                   >이전
                 </router-link>
@@ -71,14 +69,14 @@
             >
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'next'}`"
+                  :to="`/person/person/page?name=${'next'}`"
                   class="btn btnNext"
                   >다음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'last'}`"
+                  :to="`/person/person/page?name=${'last'}`"
                   class="btn btnPrev"
                   >마지막
                 </router-link>

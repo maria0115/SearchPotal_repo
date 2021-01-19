@@ -70,6 +70,12 @@ export default {
         // data fetch
         state.sortdata = result;
 
+        // // 받아온 created에 +09:00
+        // var moment = require("moment");
+        // for (var i = 0; i < state.sortdata.length; i++) {
+        //     state.sortdata[i].created = moment(state.sortdata[i].created).add(9, "h").format("YYYYMMDDTHHmmssZ");
+        // }
+
         // state.nowpage = 1;
         state.language = relanguage;
         state.replaceword.word = replaceword;
@@ -87,6 +93,7 @@ export default {
         // 총 디스플레이 페이지수
         state.totalperpagecnt = parseInt(settotalpage / state.perpagecnt);
     },
+    // 카테고리
     BigCategory(state, { res, category }) {
         state.sortdata = res.data;
         state.data.class = category;
@@ -105,5 +112,11 @@ export default {
     },
     NowPageChange(state, change) {
         state.nowpage = change;
+    },
+    // 시간 설정
+    setTime(state) {
+        var moment = require("moment");
+        var now = moment(); //오늘
+        state.data.created = now.format("YYYYMMDDTHHmmssZ");
     },
 }

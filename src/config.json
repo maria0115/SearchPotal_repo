@@ -1,10 +1,11 @@
 {
-  "defaultSize": 2,
+  "defaultSize": 3,
+  "defaultHomeSize": 2,
   "defaultSort": "desc",
   "what": [
-    "_created",
+    "created",
     "",
-    ""
+    "all"
   ],
   "options": [
     {

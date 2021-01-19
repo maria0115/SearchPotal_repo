@@ -84,36 +84,46 @@
         <a class="btnToggle">{{ language.sortdate }}</a>
         <ul class="toggleBox">
           <li class="on">
-            <a @click="SortBtn('_created', 'accOrrec')">{{
+            <a @click="SortBtn('created', 'accOrrec')">{{
               language.sortdate
             }}</a>
           </li>
-          <li><a @click="SortBtn('_created', 'accOrrec')">정확도순</a></li>
+          <li><a @click="SortBtn('created', 'accOrrec')">정확도순</a></li>
         </ul>
       </div>
       <div class="filterItem">
-        <a class="btnToggle">모든 날짜</a>
+        <a class="btnToggle">{{ language.alldates }}</a>
         <ul class="toggleBox">
           <li class="on">
-            <a @click="SortBtn('allday', 'dateType')">모든 날짜</a>
+            <a @click="SortBtn('all', 'dateType')">{{ language.alldates }}</a>
           </li>
           <li>
-            <a @click="SortBtn('ago', 'dateType', 'now-1h/s')">지난 1시간</a>
+            <a @click="SortBtn('ago', 'dateType', 'now-1h/s')">{{
+              language.anhourago
+            }}</a>
           </li>
           <li>
-            <a @click="SortBtn('season', 'dateType', 'now-1d/d')">지난 1일</a>
+            <a @click="SortBtn('season', 'dateType', 'now-1d/d')">{{
+              language.adayago
+            }}</a>
           </li>
           <li>
-            <a @click="SortBtn('season', 'dateType', 'now-7d/d')">지난 1주</a>
+            <a @click="SortBtn('season', 'dateType', 'now-7d/d')">{{
+              language.aweekago
+            }}</a>
           </li>
           <li>
-            <a @click="SortBtn('season', 'dateType', 'now-1M/d')">지난 1개월</a>
+            <a @click="SortBtn('season', 'dateType', 'now-1M/d')">{{
+              language.amonthago
+            }}</a>
           </li>
           <li>
-            <a @click="SortBtn('season', 'dateType', 'now-7y/d')">지난 1년</a>
+            <a @click="SortBtn('season', 'dateType', 'now-1y/d')">{{
+              language.ayearago
+            }}</a>
           </li>
           <li>
-            <a class="btnPeriod">기간 설정</a>
+            <a class="btnPeriod">{{ language.periodsetting }}</a>
             <div class="datepickerArea">
               <div class="datepickerBox">
                 <input
@@ -147,7 +157,7 @@
             <a @click="SortBtn('', 'fieldname')">{{ language.atthe }}</a>
           </li>
           <li>
-            <a @click="SortBtn('_vc_wviwlist30__subject', 'fieldname')">{{
+            <a @click="SortBtn('subject', 'fieldname')">{{
               language.atthetitle
             }}</a>
           </li>
@@ -157,7 +167,7 @@
             }}</a>
           </li>
           <li>
-            <a @click="SortBtn('_vc_wviwlist30__author', 'fieldname')">{{
+            <a @click="SortBtn('author', 'fieldname')">{{
               language.attheauthor
             }}</a>
           </li>
@@ -201,17 +211,27 @@ export default {
       if (it == "custom") {
         if (this.startDate == "") {
           this.startDate = $("input#datepicker1").datepicker().val();
-          this.startDate = moment(this.startDate).format("YYYYMMDD");
         }
+          this.startDate = moment(this.startDate).format("YYYYMMDD");
         if (this.endDate == "") {
           this.endDate = $("input#datepicker2").datepicker().val();
-          this.endDate = moment(this.endDate).add(1, "days").format("YYYYMMDD");
+          // this.endDate = moment(this.endDate).add(1, "days").format("YYYYMMDD");
         }
+          this.endDate = moment(this.endDate).format("YYYYMMDD");
 
         if (this.startDate != "" && this.endDate != "") {
           var dateArr = [this.startDate, this.endDate];
           whatDate = dateArr;
         }
+      }
+
+      if (
+        typeof whatDate == "undefined" ||
+        typeof whatDate == undefined ||
+        whatDate == null ||
+        whatDate == ""
+      ) {
+        whatDate = this.sortdata.gte;
       }
 
       this.$store.dispatch("FilterData", {
@@ -265,11 +285,12 @@ export default {
       selected: (state) => state.languageoptionselected,
       language: (state) => state.language,
       options: (state) => state.languageoption,
+      sortdata: (state) => state.sortdata,
     }),
   },
   created() {
     // this.$store.dispatch("LanguageFetchData", "");
-    this.$store.dispatch("LanguageFetchData", "ko");
+    // this.$store.dispatch("LanguageFetchData", "ko");
   },
 };
 </script>

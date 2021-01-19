@@ -4,20 +4,30 @@
       <section class="resultSection">
         <h2 class="title">{{ language.person }} <span class="cnt">92</span></h2>
         <ul class="employeeList">
-          <li>
-            <a href="#">
-              <span class="thumb"
-                ><img src="../portal/images/_emp_thumb_x76_01.png" alt=""
-              /></span>
-              <span class="name kor">안지원</span>
-              <span class="name eng">Ahn Ji Won</span>
-              <span class="team">전략구매팀</span>
-            </a>
-          </li>
+          <span v-if="this.sortdata.length > 0">
+            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+            <li v-for="(data, index) in sortdata" :key="index">
+              <router-link :to="`/detail/${index}`">
+                <a href="#">
+                  <span class="thumb"
+                    ><img :src="sortdata[index].photo" alt=""
+                  /></span>
+                  <span class="name kor">{{ sortdata[index].subject }}</span>
+                  <span class="team">{{ sortdata[index].dept }}</span>
+                </a>
+              </router-link>
+            </li>
+          </span>
         </ul>
-        <router-link :to="`/person/person`" class="btnMore"> MORE </router-link>
+        <router-link
+          :to="`/person/person`"
+          class="btnMore"
+          @click="setClass('person')"
+        >
+          <span @click="setClass('person')"> MORE </span>
+        </router-link>
       </section>
-      <section class="resultSection">
+      <!-- <section class="resultSection">
         <h2 class="title">부서 <span class="cnt">52</span></h2>
         <ul class="departmentList">
           <li>
@@ -28,11 +38,35 @@
             </a>
           </li>
         </ul>
-        <!-- <a href="#" class="btnMore">MORE</a> -->
-      </section>
+        <a href="#" class="btnMore">MORE</a>
+      </section> -->
       <section class="resultSection">
         <h2 class="boardTitle">{{ language.approval }}</h2>
         <ul class="boardList">
+          <span v-if="this.sortdata.category">
+            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+            <li
+              v-for="(data, index) in sortdata.category.approval"
+              :key="index"
+            >
+              <router-link :to="`/detail/${index}`">
+                <a href="#">
+                  <span class="location">{{ data.from }}</span>
+                  <span class="subject">{{ data.subject }}</span>
+                  >
+                  <span class="write"
+                    >안지원 매니저 / 전략구매팀
+                    <span class="date">{{ data.created }}</span></span
+                  >
+                  <span class="content">{{ data.body }}</span>
+                  <span class="attch"
+                    ><span class="hidden">첨부파일</span></span
+                  >
+                </a>
+              </router-link>
+            </li>
+          </span>
+
           <li>
             <a href="#">
               <span class="location">게임빌 &gt; 결재 &gt; 진행함</span>
@@ -52,8 +86,12 @@
             </a>
           </li>
         </ul>
-        <router-link :to="`/board/approval`" class="btnMore">
-          MORE
+        <router-link
+          :to="`/board/approval`"
+          class="btnMore"
+          @click="setClass('approval')"
+        >
+          <span @click="setClass('approval')"> MORE </span>
         </router-link>
       </section>
       <section class="resultSection">
@@ -76,7 +114,9 @@
             </a>
           </li>
         </ul>
-        <router-link :to="`/board/board`" class="btnMore"> MORE </router-link>
+        <router-link :to="`/board/board`" class="btnMore">
+          <span @click="setClass('board')"> MORE </span>
+        </router-link>
       </section>
     </div>
 
@@ -95,7 +135,13 @@ export default {
   computed: {
     ...mapState({
       language: (state) => state.language,
+      sortdata: (state) => state.sortdata,
     }),
+  },
+  methods: {
+    setClass(className) {
+      this.$store.dispatch("setClass", className);
+    },
   },
 };
 </script>

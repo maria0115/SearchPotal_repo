@@ -17,10 +17,15 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Person from "./components/Person";
-import config from './config.json'
+import { mapState } from "vuex";
 
 export default {
   name: "App",
+   computed: {
+    ...mapState({
+      data: (state) => state.data,
+    }),
+  },
   components: {
     Header,
     Body,
@@ -30,8 +35,12 @@ export default {
   created() {
     var date = new Date();
     date.getTimezoneOffset();
-    config.timezone = date.getTimezoneOffset();
-    console.log("111111111111111", config.timezone);
+    this.data.utc = date.getTimezoneOffset();
+    console.log("111111111111111", this.data.utc);
+
+    if(this.data.utc === -540){
+      this.$store.dispatch("LanguageFetchData", "ko");
+    }
   },
 };
 </script>
