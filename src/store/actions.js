@@ -40,12 +40,13 @@ export default {
             data.searchword = word;
             if (state.data.check && word.length > 0) {
                 console.log(word, "action");
-                data.searchwordarr.push(word);
+                // data.searchwordarr.push(word);
             } else {
                 data.searchwordarr = [];
-                data.searchwordarr.push(word);
+                // data.searchwordarr.push(word);
             }
         }
+        console.log(data.searchwordarr,"searchwordarr");
         var pagenum = config.defaultPageNum - 1;
         data.pagenum = pagenum;
 

@@ -26,6 +26,9 @@ export default {
     // 검색
     ResearchCheck(state, checked) {
         state.data.check = checked;
+        if (state.data.check === true) {
+            state.data.searchwordarr.push(state.data.searchword);
+        }
     },
     SearchData(state, { res, word, replaceword, what, whatfield, page, size }) {
         console.log('********************FilterSortData')
@@ -49,7 +52,7 @@ export default {
             data.searchword = word;
             data.pagenum = page;
             // data fetch
-            state.data.searchwordarr.push(word);
+            
             state.data.searchword = word;
             state.data.pagenum = page;
             state.nowpage = config.defaultNowPage;
@@ -69,7 +72,7 @@ export default {
         // language별 String을 replace 시켜줄 데이터 바인딩 
         var sortdata = result;
         var replace = state.replaceword;
-       
+
         // total_cnt
         state.sortdata = result;
 
@@ -78,19 +81,19 @@ export default {
         state.personData = state.sortdata.person;
 
         state.sortdata.total_cnt = 0;
-        if(state.approData){
+        if (state.approData) {
             state.sortdata.total_cnt += state.approData.total_cnt;
         }
-        if(state.boardData){
+        if (state.boardData) {
             state.sortdata.total_cnt += state.boardData.total_cnt;
         }
-        if(state.personData){
+        if (state.personData) {
             state.sortdata.total_cnt += state.personData.total_cnt;
         }
 
-         // 새로운 데이터 별 바뀐 language
-         var relanguage = replaceString.fetch(state.language, sortdata, data, replace);
-         console.log(relanguage);
+        // 새로운 데이터 별 바뀐 language
+        var relanguage = replaceString.fetch(state.language, sortdata, data, replace);
+        console.log(relanguage);
 
         // // 받아온 created에 +09:00
         // var moment = require("moment");

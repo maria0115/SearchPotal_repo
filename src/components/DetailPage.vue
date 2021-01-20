@@ -5,17 +5,17 @@
     --------------------------------------------
     <br />
     <div v-if="arr[1] === 'person'">
-      {{ personData.data[index].body }}
       이름: {{ personData.data[index].subject }} <br />
-      부서: {{ personData.data[index].body.dept }} <br />
-      직급: {{ personData.data[index].body.jobTitle }} <br />
-      직책: {{ personData.data[index].body.jobPosition }} <br />
-      회사: {{ personData.data[index].body.company }} <br />
-      휴대폰: {{ personData.data[index].body.phone }} <br />
-      자택: {{ personData.data[index].body.tel }} <br />
-      E-mail: {{ personData.data[index].body.email }} <br />
-      담당업무: {{ personData.data[index].body.job }} <br />
+      부서: {{ personData.data[index].dept }} <br />
+      직급: {{ personData.data[index].jobTitle }} <br />
+      직책: {{ personData.data[index].jobPosition }} <br />
+      회사: {{ personData.data[index].company }} <br />
+      휴대폰: {{ personData.data[index].phone }} <br />
+      자택: {{ personData.data[index].tel }} <br />
+      E-mail: {{ personData.data[index].email }} <br />
+      담당업무: {{ personData.data[index].job }} <br />
       created: {{ personData.data[index].created }} <br />
+
     </div>
     <div v-if="arr[1] === 'approval'">
       제목 : {{ approData.data[index].subject }}
