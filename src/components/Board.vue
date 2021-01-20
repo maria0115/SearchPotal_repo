@@ -7,50 +7,48 @@
         <ul class="boardList">
           <!-- <router-view></router-view> -->
           <span v-if="category === 'approval'">
-            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
-            <li
-              v-for="(data, index) in approData.data"
-              :key="index"
-            >
-              <router-link :to="`/detail/${index} approval`">
-                <a href="#">
-                  <span class="location">{{ data.nav }}</span>
-                  <span class="subject">{{ data.subject }}</span>
-                  >
-                  <span class="write"
-                    >안지원 매니저 / 전략구매팀
-                    <span class="date">{{ data.created }}</span></span
-                  >
-                  <span class="content">{{ data.body }}</span>
-                  <span class="attch"
-                    ><span class="hidden">첨부파일</span></span
-                  >
-                </a>
-              </router-link>
-            </li>
+            <span v-if="approData">
+              <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+              <li v-for="(data, index) in approData.data" :key="index">
+                <router-link :to="`/detail/${index} approval`">
+                  <a href="#">
+                    <span class="location">{{ data.nav }}</span>
+                    <span class="subject">{{ data.subject }}</span>
+                    >
+                    <span class="write"
+                      >안지원 매니저 / 전략구매팀
+                      <span class="date">{{ data.created }}</span></span
+                    >
+                    <span class="content">{{ data.body }}</span>
+                    <span class="attch"
+                      ><span class="hidden">첨부파일</span></span
+                    >
+                  </a>
+                </router-link>
+              </li>
+            </span>
           </span>
           <span v-else-if="category === 'board'">
-            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
-            <li
-              v-for="(data, index) in boardData.data"
-              :key="index"
-            >
-              <router-link :to="`/detail/${index} board`">
-                <a href="#">
-                  <span class="location">{{ data.from }}</span>
-                  <span class="subject">{{ data.subject }}</span>
-                  >
-                  <span class="write"
-                    >안지원 매니저 / 전략구매팀
-                    <span class="date">{{ data.created }}</span></span
-                  >
-                  <span class="content">{{ data.body }}</span>
-                  <span class="attch"
-                    ><span class="hidden">첨부파일</span></span
-                  >
-                </a>
-              </router-link>
-            </li>
+            <span v-if="boardData">
+              <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+              <li v-for="(data, index) in boardData.data" :key="index">
+                <router-link :to="`/detail/${index} board`">
+                  <a href="#">
+                    <span class="location">{{ data.from }}</span>
+                    <span class="subject">{{ data.subject }}</span>
+                    >
+                    <span class="write"
+                      >안지원 매니저 / 전략구매팀
+                      <span class="date">{{ data.created }}</span></span
+                    >
+                    <span class="content">{{ data.body }}</span>
+                    <span class="attch"
+                      ><span class="hidden">첨부파일</span></span
+                    >
+                  </a>
+                </router-link>
+              </li>
+            </span>
           </span>
         </ul>
         <div class="pagination">
@@ -59,8 +57,11 @@
           <ul>
             <span v-if="!(this.nowpage == 1)">
               <li>
-                <router-link :to="`/board/${category}/page?name=${'first'}`" class="btn btnPrev">
-                처음
+                <router-link
+                  :to="`/board/${category}/page?name=${'first'}`"
+                  class="btn btnPrev"
+                >
+                  처음
                 </router-link>
               </li>
               <li>

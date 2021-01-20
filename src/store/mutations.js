@@ -26,9 +26,9 @@ export default {
     // 검색
     ResearchCheck(state, checked) {
         state.data.check = checked;
-        if (state.data.check === true) {
-            state.data.searchwordarr.push(state.data.searchword);
-        }
+        // if (state.data.check === true) {
+        //     state.data.searchwordarr.push(state.data.searchword);
+        // }
     },
     SearchData(state, { res, word, replaceword, what, whatfield, page, size }) {
         console.log('********************FilterSortData')

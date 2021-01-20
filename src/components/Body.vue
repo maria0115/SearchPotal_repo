@@ -17,13 +17,11 @@
             </li>
           </span>
         </ul>
-        <router-link
-          :to="`/person/person`"
-          class="btnMore"
-          @click="setClass('person')"
-        >
-          <span @click="setClass('person')"> MORE </span>
-        </router-link>
+        <span @click="setClass('person')">
+          <router-link :to="`/person/person`" class="btnMore">
+            MORE
+          </router-link>
+        </span>
       </section>
       <section class="resultSection">
         <h2 class="boardTitle">{{ language.approval }}</h2>
@@ -48,11 +46,7 @@
             </li>
           </span>
         </ul>
-        <router-link
-          :to="`/board/approval`"
-          class="btnMore"
-          @click="setClass('approval')"
-        >
+        <router-link :to="`/board/approval`" class="btnMore">
           <span @click="setClass('approval')"> MORE </span>
         </router-link>
       </section>
@@ -79,7 +73,7 @@
             </li>
           </span>
         </ul>
-        <router-link :to="`/board/board`" class="btnMore" @click="setClass('board')">
+        <router-link :to="`/board/board`" class="btnMore">
           <span @click="setClass('board')"> MORE </span>
         </router-link>
       </section>
@@ -109,6 +103,7 @@ export default {
   methods: {
     setClass(className) {
       this.$store.dispatch("setClass", className);
+      this.$store.dispatch("BigCategory", className);
     },
   },
 };
