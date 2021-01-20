@@ -6,9 +6,10 @@ const replaceString = {
             var cnt = 0;
             if (!(sortdata.total_cnt == undefined)) {
                 cnt = sortdata.total_cnt;
+                replaceword.count = `<span class='highlight'>${replaceword.count}</span>`
             }
             relanguage.searchresult =
-                relanguage.searchresult.replace(new RegExp(replaceword.count), cnt);
+                relanguage.searchresult.replace(new RegExp(replaceword.count), `<span class='highlight'>${cnt}</span>`);
             // 검색어 변환
             var rereplace = '&quot; &quot;';
             if (relanguage.searchresult.indexOf('&quot; &quot;') == -1) {
@@ -52,7 +53,7 @@ export default {
             data.searchword = word;
             data.pagenum = page;
             // data fetch
-            
+
             state.data.searchword = word;
             state.data.pagenum = page;
             state.nowpage = config.defaultNowPage;

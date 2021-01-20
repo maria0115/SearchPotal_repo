@@ -2,7 +2,10 @@
   <div class="pageContainer">
     <div class="pageContent">
       <section class="resultSection">
-        <h2 class="title">{{ language.person }} <span class="cnt">92</span></h2>
+        <h2 class="title">
+          {{ language.person }}
+          <!-- <span class="cnt">92</span> -->
+        </h2>
         <ul class="employeeList">
           <span v-if="this.personData">
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->

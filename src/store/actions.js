@@ -30,7 +30,7 @@ export default {
     },
     // 카테고리
     setClass({ state, commit }, className) {
-        state.data.class = className;   
+        state.data.class = className;
     },
     //검색
     SearchWord({ state, commit }, { word }) {
@@ -99,7 +99,9 @@ export default {
     // 페이지
     PageSearch({ commit, state }, { page, size }) {
         var data = state.data;
-        data.pagenum = page;
+        // data.pagenum = page;
+        data.pagenum = page * data.size;
+        
         data.size = size;
         console.log("PageSearch 왔다");
         console.log(page, size);

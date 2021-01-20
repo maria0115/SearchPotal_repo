@@ -14,9 +14,8 @@
                   <a href="#">
                     <span class="location">{{ data.nav }}</span>
                     <span class="subject">{{ data.subject }}</span>
-                    >
                     <span class="write"
-                      >안지원 매니저 / 전략구매팀
+                      >{{ data.author }} / {{ data.dept }}
                       <span class="date">{{ data.created }}</span></span
                     >
                     <span class="content">{{ data.body }}</span>
@@ -36,9 +35,8 @@
                   <a href="#">
                     <span class="location">{{ data.from }}</span>
                     <span class="subject">{{ data.subject }}</span>
-                    >
                     <span class="write"
-                      >안지원 매니저 / 전략구매팀
+                      >{{ data.author }} / {{ data.dept }}
                       <span class="date">{{ data.created }}</span></span
                     >
                     <span class="content">{{ data.body }}</span>

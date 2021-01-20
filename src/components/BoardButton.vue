@@ -6,12 +6,36 @@
       v-for="index in vforcnt"
       :key="index"
     >
-      <router-link
-        :to="`/board/${category}/page?page=${index + (nowpage - 1) * perpagecnt}`"
-        class="link"
-      >
-        <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
-      </router-link>
+      <span v-if="category === 'person'">
+        <router-link
+          :to="`/person/${category}/page?page=${
+            index + (nowpage - 1) * perpagecnt
+          }`"
+          class="link"
+        >
+          <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
+        </router-link>
+      </span>
+      <span v-if="category === 'approval'">
+        <router-link
+          :to="`/board/${category}/page?page=${
+            index + (nowpage - 1) * perpagecnt
+          }`"
+          class="link"
+        >
+          <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
+        </router-link>
+      </span>
+      <span v-if="category === 'board'">
+        <router-link
+          :to="`/board/${category}/page?page=${
+            index + (nowpage - 1) * perpagecnt
+          }`"
+          class="link"
+        >
+          <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
+        </router-link>
+      </span>
     </li>
     <!-- ### 활성화 메뉴 클래스 "on" 추가 ### -->
   </span>
