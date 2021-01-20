@@ -7,7 +7,7 @@
       :key="index"
     >
       <router-link
-        :to="`/board/approval/page?page=${index + (nowpage - 1) * perpagecnt}`"
+        :to="`/board/${category}/page?page=${index + (nowpage - 1) * perpagecnt}`"
         class="link"
       >
         <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
@@ -32,6 +32,7 @@ export default {
       nowpage: (state) => state.nowpage,
       perpagecnt: (state) => state.perpagecnt,
       data: (state) => state.data,
+      category: (state) => state.data.class,
     }),
   },
 };

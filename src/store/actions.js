@@ -20,6 +20,12 @@ export default {
         return Search(data)
             .then(response => {
                 commit('BigCategory', { res: response, category: category });
+                commit('SearchData', {
+                    res: response.data, word: state.data.searchword, page: state.data.pagenum,
+                    replaceword: state.data.searchword, what: state.data.what, whatfield: state.data.whatfield
+                });
+
+                console.log('aaaaaaaaaaaaaaa', response);
             });
     },
     // 카테고리
@@ -50,11 +56,13 @@ export default {
         return Search(data)
             .then(response => {
                 commit('SearchData', { res: response.data, word: word, page: pagenum, replaceword: data.searchword });
+
+                console.log('seach ********** ++++++++++++ ------------', response);
             });
 
     },
     // 필터 선택시
-    FilterData({ commit, state }, { what, whatfield, gte }) {
+    FilterData({ commit, state }, { what, whatfield, gte, lt }) {
         var data = state.data;
 
         if (data.class == "all") {
@@ -69,6 +77,11 @@ export default {
         } else {
             data.gte = gte;
         }
+        if (typeof lt == "undefined" || typeof lt == undefined || lt == null || lt == "") {
+            console.log('hhhhhhhhhhhhh  ', data.lt);
+        } else {
+            data.lt = lt;
+        }
 
         commit('setTime');
 
@@ -77,6 +90,8 @@ export default {
         return Search(data)
             .then(response => {
                 commit('SearchData', { what: what, whatfield: whatfield, res: response.data, replaceword: data.searchword });
+
+                console.log('aaaaaaaaaaaaaaa', response);
             });
 
     },
@@ -97,6 +112,8 @@ export default {
             .then(response => {
                 console.log(response);
                 commit('SearchData', { res: response.data, page: page, size: size, replaceword: data.searchword });
+
+                console.log('aaaaaaaaaaaaaaa', response);
             });
 
     },

@@ -4,29 +4,29 @@
       <section class="resultSection">
         <h2 class="empInfoTitle">{{ language.person }}</h2>
         <ul class="empInfoList">
-          <span v-if="this.sortdata.length > 0">
+          <span v-if="this.personData">
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
-            <li v-for="(data, index) in sortdata" :key="index">
-              <router-link :to="`/detail/${index}`">
+            <li v-for="(data, index) in personData.data" :key="index">
+              <router-link :to="`/detail/${index} person`">
                 <div class="profile">
                   <div class="thumb">
                     <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
                   </div>
-                  <div class="name kor">{{ sortdata[index].subject }}</div>
+                  <div class="name kor">{{ data.subject }}</div>
                 </div>
-                <div class="dept">{{ sortdata[index].dept }}</div>
+                <div class="dept">{{ data.dept }}</div>
                 <div class="pos">
-                  <span>직급: {{ sortdata[index].body.jobTitle }}</span> <span>직책: {{ sortdata[index].body.jobPosition}}</span>
+                  <span>직급: {{ data.body.jobTitle }}</span> <span>직책: {{ data.body.jobPosition}}</span>
                 </div>
                 <div class="contact">
-                  <span>회사:  {{ sortdata[index].body.company }}</span>
-                  <span>휴대폰:  {{ sortdata[index].body.phone }}</span>
+                  <span>회사:  {{ data.body.company }}</span>
+                  <span>휴대폰:  {{ data.body.phone }}</span>
                 </div>
                 <div class="contact">
-                  <span>자택:  {{ sortdata[index].body.tel }}</span>
-                  <span>E-mail: {{ sortdata[index].body.email }}</span>
+                  <span>자택:  {{ data.body.tel }}</span>
+                  <span>E-mail: {{ data.body.email }}</span>
                 </div>
-                <div class="work"><span>담당업무: {{ sortdata[index].body.job }}</span></div>
+                <div class="work"><span>담당업무: {{ data.body.job }}</span></div>
               </router-link>
             </li>
           </span>
@@ -102,6 +102,7 @@ export default {
   computed: {
     ...mapState({
       sortdata: (state) => state.sortdata,
+      personData: (state) => state.personData,
       nowpage: (state) => state.nowpage,
       perpage: (state) => state.perpage,
       perpagecnt: (state) => state.perpagecnt,

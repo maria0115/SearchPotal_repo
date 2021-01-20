@@ -84,18 +84,18 @@
         <a class="btnToggle">{{ language.sortdate }}</a>
         <ul class="toggleBox">
           <li class="on">
-            <a @click="SortBtn('created', 'accOrrec')">{{
-              language.sortdate
-            }}</a>
+            <a @click="SortBtn('desc', 'aOrd')">{{ language.sortdate }}</a>
           </li>
-          <li><a @click="SortBtn('created', 'accOrrec')">정확도순</a></li>
+          <li><a @click="SortBtn('accuracy', 'aOrd')">정확도순</a></li>
         </ul>
       </div>
       <div class="filterItem">
         <a class="btnToggle">{{ language.alldates }}</a>
         <ul class="toggleBox">
           <li class="on">
-            <a @click="SortBtn('all', 'dateType')">{{ language.alldates }}</a>
+            <a @click="SortBtn('all', 'dateType', 'default')">{{
+              language.alldates
+            }}</a>
           </li>
           <li>
             <a @click="SortBtn('ago', 'dateType', 'now-1h/s')">{{
@@ -208,21 +208,29 @@ export default {
 
       var moment = require("moment");
       // moment().format("YYYY-MM-DD HH:mm:ss Z");
+      var lt = "";
       if (it == "custom") {
         if (this.startDate == "") {
           this.startDate = $("input#datepicker1").datepicker().val();
         }
-          this.startDate = moment(this.startDate).format("YYYYMMDD");
+        this.startDate = moment(new Date(this.startDate)).format("YYYYMMDDHHmmss");
         if (this.endDate == "") {
           this.endDate = $("input#datepicker2").datepicker().val();
           // this.endDate = moment(this.endDate).add(1, "days").format("YYYYMMDD");
         }
-          this.endDate = moment(this.endDate).format("YYYYMMDD");
-
-        if (this.startDate != "" && this.endDate != "") {
-          var dateArr = [this.startDate, this.endDate];
-          whatDate = dateArr;
+        this.endDate = moment(new Date(this.endDate)).add(1, "days").format("YYYYMMDDHHmmss");
+        if (this.startDate != "") {
+          whatDate = this.startDate;
         }
+
+        if (this.endDate != "") {
+          lt = this.endDate;
+        }
+
+        // if (this.startDate != "" && this.endDate != "") {
+        //   var dateArr = [this.startDate, this.endDate];
+        //   whatDate = dateArr;
+        // }
       }
 
       if (
@@ -239,6 +247,7 @@ export default {
         whatfield: fieldname,
         category: id,
         gte: whatDate,
+        lt: lt,
       });
 
       this.startDate = "";
@@ -290,7 +299,7 @@ export default {
   },
   created() {
     // this.$store.dispatch("LanguageFetchData", "");
-    // this.$store.dispatch("LanguageFetchData", "ko");
+    this.$store.dispatch("LanguageFetchData", this.selected);
   },
 };
 </script>

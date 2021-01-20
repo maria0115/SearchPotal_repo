@@ -8,6 +8,9 @@ Vue.use(VueX);
 export const store = new VueX.Store({
     state: {
         sortdata: {},
+        approData: {},
+        boardData: {},
+        personData: {},
         data: {
             from: 1, // 받아온 데이터의 page
             size: config.defaultSize,
@@ -20,7 +23,8 @@ export const store = new VueX.Store({
             pagenum: 0, // 보낼 데이터의 page
             check: false, // AND 검색을 하는지
             dateType: "all", // 날짜 필터 (all은 모든 날짜)
-            gte: [], // 날짜 필터의 값 (now-1d ...)
+            gte: "default", // 날짜 필터의 값 (now-1d ...)
+            lt: "", // 날짜 필터의 값 (now-1d ...)
             utc: config.timezone,
             created: "", // 현재 시각
         },

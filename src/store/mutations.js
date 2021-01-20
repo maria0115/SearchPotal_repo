@@ -31,6 +31,11 @@ export default {
         console.log('********************FilterSortData')
         console.log(res);
 
+        console.log('45454545454545454545454545454545');
+        console.log('approval          ', res.approval);
+        console.log('board          ', res.board);
+        console.log('person          ', res.person);
+
         var result = {};
 
         if (typeof res === 'string') {
@@ -64,11 +69,28 @@ export default {
         // language별 String을 replace 시켜줄 데이터 바인딩 
         var sortdata = result;
         var replace = state.replaceword;
-        // 새로운 데이터 별 바뀐 language
-        var relanguage = replaceString.fetch(state.language, sortdata, data, replace);
-        console.log(relanguage);
-        // data fetch
+       
+        // total_cnt
         state.sortdata = result;
+
+        state.approData = state.sortdata.approval;
+        state.boardData = state.sortdata.board;
+        state.personData = state.sortdata.person;
+
+        state.sortdata.total_cnt = 0;
+        if(state.approData){
+            state.sortdata.total_cnt += state.approData.total_cnt;
+        }
+        if(state.boardData){
+            state.sortdata.total_cnt += state.boardData.total_cnt;
+        }
+        if(state.personData){
+            state.sortdata.total_cnt += state.personData.total_cnt;
+        }
+
+         // 새로운 데이터 별 바뀐 language
+         var relanguage = replaceString.fetch(state.language, sortdata, data, replace);
+         console.log(relanguage);
 
         // // 받아온 created에 +09:00
         // var moment = require("moment");
@@ -79,13 +101,13 @@ export default {
         // state.nowpage = 1;
         state.language = relanguage;
         state.replaceword.word = replaceword;
-        state.replaceword.count = result.total_cnt;
+        state.replaceword.count = state.sortdata.total_cnt;
         // page 계산
         // 마지막페이지-1
-        var settotalpage = parseInt(result.total_cnt / config.defaultSize);
+        var settotalpage = parseInt(state.sortdata.total_cnt / config.defaultSize);
         state.totalpage = settotalpage;
         // 마지막페이지 객체수
-        state.remainder = result.total_cnt % config.defaultSize;
+        state.remainder = state.sortdata.total_cnt % config.defaultSize;
         // 마지막 디스플레이 객체수
         state.perpage = settotalpage % state.perpagecnt;
         console.log(state.perpage, "perpage");
@@ -100,6 +122,10 @@ export default {
         state.data.pagenum = config.defaultPageNum - 1;
         state.data.size = config.defaultSize;
         state.nowpage = config.defaultNowPage;
+
+        state.approData = state.sortdata.approval;
+        state.boardData = state.sortdata.board;
+        state.personData = state.sortdata.person;
     },
     // 다국어
     LanguageData(state, { data }) {

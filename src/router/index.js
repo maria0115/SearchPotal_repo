@@ -4,7 +4,6 @@ import Body from '@/components/Body'
 import Board from '@/components/Board'
 import Person from '@/components/Person';
 import DetailPage from '@/components/DetailPage';
-import BoardList from '@/components/BoardList.vue';
 import { store } from '../store/index.js';
 import bus from '../utils/bus.js';
 
@@ -83,7 +82,7 @@ export default new Router({
               page = query.page;
             }
             var size = config.defaultSize;
-            if (!(totalpage == 0) && page == totalpage + 1 && store.state.sortdata.category) {
+            if (!(totalpage == 0) && page == totalpage + 1 && store.state.data.class) {
               size = remainder;
             }
             page--;
@@ -91,7 +90,6 @@ export default new Router({
             store.dispatch("PageSearch", { page: page, size: size })
               .then(() => {
                 bus.$emit('off:progress');
-                console.log("ddddddddddddddd", store.state.data.class);
                 next('/board/' + store.state.data.class);
               })
               .catch(() => new Error("failed to fetch boardlist"));
@@ -160,7 +158,7 @@ export default new Router({
               page = query.page;
             }
             var size = config.defaultSize;
-            if (!(totalpage == 0) && page == totalpage + 1 && store.state.sortdata.category) {
+            if (!(totalpage == 0) && page == totalpage + 1 && store.state.data.class) {
               size = remainder;
             }
             page--;
@@ -168,9 +166,9 @@ export default new Router({
             store.dispatch("PageSearch", { page: page, size: size })
               .then(() => {
                 bus.$emit('off:progress');
-                next('/person/' + store.state.data.class);
+                next('/person/person');
               })
-              .catch(() => new Error("failed to fetch boardlist"));
+              .catch(() => new Error("failed to fetch personList"));
           },
         },
       ]

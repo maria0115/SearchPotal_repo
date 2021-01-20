@@ -6,13 +6,36 @@
         <h2 class="boardTitle">{{ language[category] }}</h2>
         <ul class="boardList">
           <!-- <router-view></router-view> -->
-          <span v-if="this.sortdata.category">
+          <span v-if="category === 'approval'">
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li
-              v-for="(data, index) in sortdata.category.approval"
+              v-for="(data, index) in approData.data"
               :key="index"
             >
-              <router-link :to="`/detail/${index}`">
+              <router-link :to="`/detail/${index} approval`">
+                <a href="#">
+                  <span class="location">{{ data.nav }}</span>
+                  <span class="subject">{{ data.subject }}</span>
+                  >
+                  <span class="write"
+                    >안지원 매니저 / 전략구매팀
+                    <span class="date">{{ data.created }}</span></span
+                  >
+                  <span class="content">{{ data.body }}</span>
+                  <span class="attch"
+                    ><span class="hidden">첨부파일</span></span
+                  >
+                </a>
+              </router-link>
+            </li>
+          </span>
+          <span v-else-if="category === 'board'">
+            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+            <li
+              v-for="(data, index) in boardData.data"
+              :key="index"
+            >
+              <router-link :to="`/detail/${index} board`">
                 <a href="#">
                   <span class="location">{{ data.from }}</span>
                   <span class="subject">{{ data.subject }}</span>
@@ -36,15 +59,13 @@
           <ul>
             <span v-if="!(this.nowpage == 1)">
               <li>
-                <router-link
-                  :to="`/board/approval/page?name=${'first'}`"
-                  class="btn btnPrev"
-                  >처음
+                <router-link :to="`/board/${category}/page?name=${'first'}`" class="btn btnPrev">
+                처음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'prev'}`"
+                  :to="`/board/${category}/page?name=${'prev'}`"
                   class="btn btnPrev"
                   >이전
                 </router-link>
@@ -68,14 +89,14 @@
             >
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'next'}`"
+                  :to="`/board/${category}/page?name=${'next'}`"
                   class="btn btnNext"
                   >다음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/board/approval/page?name=${'last'}`"
+                  :to="`/board/${category}/page?name=${'last'}`"
                   class="btn btnPrev"
                   >마지막
                 </router-link>
@@ -100,6 +121,8 @@ export default {
   computed: {
     ...mapState({
       sortdata: (state) => state.sortdata,
+      approData: (state) => state.approData,
+      boardData: (state) => state.boardData,
       nowpage: (state) => state.nowpage,
       perpage: (state) => state.perpage,
       perpagecnt: (state) => state.perpagecnt,
