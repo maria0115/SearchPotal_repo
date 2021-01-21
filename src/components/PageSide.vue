@@ -15,14 +15,18 @@
         <li class="on"><a href="#popularWeekList">이번주</a></li>
         <li><a href="#popularMonthList">이번달</a></li>
       </ul>
-      <ol class="popularList tabContent" id="popularWeekList" style="display: block">
-        <li>
-          <a href="#"><em class="num">1</em><span class="keyword">플랫폼</span></a>
-        </li>
-      </ol>
-      <ol class="popularList tabContent" id="popularMonthList" style="display: none">
-        <li>
-          <a href="#"><em class="num">1</em><span class="keyword">플랫폼1</span></a>
+      <ol
+        class="popularList tabContent"
+        id="popularWeekList"
+        style="display: block"
+      >
+        <li v-for="(item, index) in kList" :key="index">
+          <a href="#" v-if="index < 5"
+            ><em class="num">{{ index + 1 }}</em
+            ><span class="keyword" @click="kSearch(item.key)">{{
+              item.key
+            }}</span></a
+          >
         </li>
       </ol>
     </section>
@@ -30,7 +34,24 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState({
+      language: (state) => state.language,
+      kList: (state) => state.kList,
+    }),
+  },
+  created() {
+    this.$store.dispatch("KeywordOfSearch");
+  },
+  methods: {
+    kSearch(keyword) {
+      this.$store.dispatch("SearchWord", { word: keyword });
+    },
+  },
+};
 </script>
 
 <style>

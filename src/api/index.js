@@ -20,8 +20,19 @@ function Search(data){
         }
     })
 }
+function keywordofsearch(){
+    return axios({
+        method: 'post',
+        url: `/keywordofsearch`,
+        data: JSON.stringify({keyword: "keyword"}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
 
 export{
     GetLanguage,
-    Search
+    Search,
+    keywordofsearch,
 }

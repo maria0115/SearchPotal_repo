@@ -1,4 +1,4 @@
-import { GetLanguage, Search } from '../api/index.js';
+import { GetLanguage, Search, keywordofsearch } from '../api/index.js';
 import config from '../config.json';
 export default {
     // 헤더에 있는 메뉴 클릭시 카테고리 변경
@@ -32,8 +32,16 @@ export default {
     setClass({ state, commit }, className) {
         state.data.class = className;
     },
+    // 인기검색어
+    KeywordOfSearch({ state, commit }) {
+        return keywordofsearch()
+            .then(response => {
+                console.log('KeywordOfSearch => ', response);
+                commit('kSearch', { res: response });
+            });
+    },
     //검색
-    SearchWord({ state, commit }, { word }) {
+    SearchWord({ state, commit, dispatch }, { word }) {
         console.log(state.sortdata.total_cnt, "****************searchword");
         var data = state.data;
         if (word !== undefined) {
@@ -56,7 +64,9 @@ export default {
 
         return Search(data)
             .then(response => {
+                dispatch("KeywordOfSearch");
                 commit('SearchData', { res: response.data, word: word, page: pagenum, replaceword: data.searchword });
+
 
                 console.log('seach ********** ++++++++++++ ------------', response);
             });
@@ -101,7 +111,7 @@ export default {
         var data = state.data;
         // data.pagenum = page;
         data.pagenum = page * data.size;
-        
+
         data.size = size;
         console.log("PageSearch 왔다");
         console.log(page, size);
@@ -133,6 +143,7 @@ export default {
         }
         data.searchword = getdata.searchword;
         console.log(data, "language");
+        data.searchwordarr = state.data.searchwordarr;
 
         console.log('ffffffffffflanguage ', data);
 

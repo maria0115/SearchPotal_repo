@@ -13,10 +13,6 @@ const replaceString = {
             // 검색어 변환
             var rereplace = '&quot; &quot;';
 
-            if(data.searchwordarr.length >1){
-                replaceword = data.searchwordarr
-            }
-
             if (relanguage.searchresult.indexOf('&quot; &quot;') == -1) {
                 rereplace = `&quot;${replaceword.word}&quot;`;
             }
@@ -153,5 +149,21 @@ export default {
         var moment = require("moment");
         var now = moment(); //오늘
         state.data.created = now.format("YYYYMMDDTHHmmssZ");
+    },
+    // 인기검색어
+    kSearch(state, { res }) {
+        state.kList = res.data;
+        console.log("kList ::: ", state.kList);
+
+        // doc_count 큰 순서대로 정렬
+        for (var i = 0; i < state.kList.length; i++) {
+            for (var j = i+1; j < state.kList.length; j++) {
+                if (state.kList[i].doc_count < state.kList[j].doc_count) {
+                    var temp = state.kList[i];
+                    state.kList[i] = state.kList[j];
+                    state.kList[j] = temp;
+                }
+            }
+        }
     },
 }
