@@ -33,10 +33,8 @@ export default {
         // }
     },
     SearchData(state, { res, word, replaceword, what, whatfield, page, size }) {
-        console.log('********************FilterSortData')
-        console.log(res);
+        console.log('전체 결과  ', res);
 
-        console.log('45454545454545454545454545454545');
         console.log('approval          ', res.approval);
         console.log('board          ', res.board);
         console.log('person          ', res.person);
@@ -95,7 +93,6 @@ export default {
 
         // 새로운 데이터 별 바뀐 language
         var relanguage = replaceString.fetch(state.language, sortdata, data, replace);
-        console.log(relanguage);
 
         // // 받아온 created에 +09:00
         // var moment = require("moment");
@@ -115,8 +112,6 @@ export default {
         state.remainder = state.sortdata.total_cnt % config.defaultSize;
         // 마지막 디스플레이 객체수
         state.perpage = settotalpage % state.perpagecnt;
-        console.log(state.perpage, "perpage");
-        console.log(settotalpage, "settotalpage");
         // 총 디스플레이 페이지수
         state.totalperpagecnt = parseInt(settotalpage / state.perpagecnt);
     },
@@ -147,21 +142,24 @@ export default {
     // 시간 설정
     setTime(state) {
         var moment = require("moment");
-        var now = moment(); //오늘
+        var now = moment(); // 지금 이 순간
         state.data.created = now.format("YYYYMMDDTHHmmssZ");
     },
     // 인기검색어
     kSearch(state, { res }) {
         state.kList = res.data;
-        console.log("kList ::: ", state.kList);
 
         // doc_count 큰 순서대로 정렬
         for (var i = 0; i < state.kList.length; i++) {
-            for (var j = i+1; j < state.kList.length; j++) {
-                if (state.kList[i].doc_count < state.kList[j].doc_count) {
-                    var temp = state.kList[i];
-                    state.kList[i] = state.kList[j];
-                    state.kList[j] = temp;
+            for (var j = i + 1; j < state.kList.length; j++) {
+                if (state.kList[i].key === "") {
+                    state.kList.splice(i, 1);
+                } else {
+                    if (state.kList[i].doc_count < state.kList[j].doc_count) {
+                        var temp = state.kList[i];
+                        state.kList[i] = state.kList[j];
+                        state.kList[j] = temp;
+                    }
                 }
             }
         }

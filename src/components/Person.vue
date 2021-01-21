@@ -16,17 +16,20 @@
                 </div>
                 <div class="dept">{{ data.dept }}</div>
                 <div class="pos">
-                  <span>직급: {{ data.body.jobTitle }}</span> <span>직책: {{ data.body.jobPosition}}</span>
+                  <span>직급: {{ data.jobTitle }}</span>
+                  <span>직책: {{ data.jobPosition }}</span>
                 </div>
                 <div class="contact">
-                  <span>회사:  {{ data.body.company }}</span>
-                  <span>휴대폰:  {{ data.body.phone }}</span>
+                  <span>회사: {{ data.company }}</span>
+                  <span>휴대폰: {{ data.phone }}</span>
                 </div>
                 <div class="contact">
-                  <span>자택:  {{ data.body.tel }}</span>
-                  <span>E-mail: {{ data.body.email }}</span>
+                  <span>자택: {{ data.tel }}</span>
+                  <span>E-mail: {{ data.email }}</span>
                 </div>
-                <div class="work"><span>담당업무: {{ data.body.job }}</span></div>
+                <div class="work">
+                  <span>담당업무: {{ data.job }}</span>
+                </div>
               </router-link>
             </li>
           </span>

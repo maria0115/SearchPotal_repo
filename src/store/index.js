@@ -8,6 +8,7 @@ Vue.use(VueX);
 export const store = new VueX.Store({
     state: {
         kList: {},
+        term: "week",
         sortdata: {},
         approData: {},
         boardData: {},

@@ -36,7 +36,7 @@ export default {
     var date = new Date();
     date.getTimezoneOffset();
     this.data.utc = date.getTimezoneOffset();
-    console.log("111111111111111", this.data.utc);
+    console.log("utc : ", this.data.utc);
 
     if(this.data.utc === -540){
       this.$store.dispatch("LanguageFetchData", "ko");

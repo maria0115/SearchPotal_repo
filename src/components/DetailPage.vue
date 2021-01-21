@@ -21,7 +21,7 @@
       제목 : {{ approData.data[index].subject }}
       <br />
       <br />
-      작성자 : {{ approData.data[index].from }}
+      작성자 : {{ approData.data[index].author }}
       <br />
       <br />
       작성일자 : {{ approData.data[index].created }}
@@ -33,7 +33,7 @@
       제목 : {{ boardData.data[index].subject }}
       <br />
       <br />
-      작성자 : {{ boardData.data[index].from }}
+      작성자 : {{ boardData.data[index].author }}
       <br />
       <br />
       작성일자 : {{ boardData.data[index].created }}

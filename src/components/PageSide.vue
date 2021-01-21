@@ -12,8 +12,8 @@
     <section class="asideSection">
       <h2>인기검색어</h2>
       <ul class="tabMenu">
-        <li class="on"><a href="#popularWeekList">이번주</a></li>
-        <li><a href="#popularMonthList">이번달</a></li>
+        <li class="on"><a href="#" @click="kListFilter('week')">이번주</a></li>
+        <li><a href="#" @click="kListFilter('month')">이번달</a></li>
       </ul>
       <ol
         class="popularList tabContent"
@@ -41,14 +41,18 @@ export default {
     ...mapState({
       language: (state) => state.language,
       kList: (state) => state.kList,
+      term: (state) => state.term,
     }),
   },
   created() {
-    this.$store.dispatch("KeywordOfSearch");
+    this.$store.dispatch("KeywordOfSearch", { term: this.term });
   },
   methods: {
     kSearch(keyword) {
       this.$store.dispatch("SearchWord", { word: keyword });
+    },
+    kListFilter(term) {
+      this.$store.dispatch("KeywordOfSearch", { term: term });
     },
   },
 };

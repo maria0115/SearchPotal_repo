@@ -15,7 +15,7 @@ export default {
 
         commit('setTime');
 
-        console.log('fffffffffff111 ', data);
+        console.log('헤더 클릭 ', data);
 
         return Search(data)
             .then(response => {
@@ -25,7 +25,7 @@ export default {
                     replaceword: state.data.searchword, what: state.data.what, whatfield: state.data.whatfield
                 });
 
-                console.log('aaaaaaaaaaaaaaa', response);
+                console.log('헤더 클릭 결과 ', response);
             });
     },
     // 카테고리
@@ -33,48 +33,50 @@ export default {
         state.data.class = className;
     },
     // 인기검색어
-    KeywordOfSearch({ state, commit }) {
-        return keywordofsearch()
+    KeywordOfSearch({ state, commit }, { term }) {
+        commit('setTime');
+        state.term = term;
+        var data = {};
+        data.term = term;
+        data.date = state.data.created;
+        return keywordofsearch(data)
             .then(response => {
-                console.log('KeywordOfSearch => ', response);
                 commit('kSearch', { res: response });
             });
     },
     //검색
     SearchWord({ state, commit, dispatch }, { word }) {
-        console.log(state.sortdata.total_cnt, "****************searchword");
         var data = state.data;
         if (word !== undefined) {
             data.searchword = word;
             if (state.data.check && word.length > 0) {
-                console.log(word, "action");
                 data.searchwordarr.push(word);
             } else {
                 data.searchwordarr = [];
                 data.searchwordarr.push(word);
             }
         }
-        console.log(data.searchwordarr, "searchwordarr");
         var pagenum = config.defaultPageNum - 1;
         data.pagenum = pagenum;
 
         commit('setTime');
 
-        console.log('fffffffffff222 ', data);
+        console.log('검색 버튼 클릭 ', data);
 
         return Search(data)
             .then(response => {
-                dispatch("KeywordOfSearch");
+                dispatch("KeywordOfSearch", { term: state.term });
                 commit('SearchData', { res: response.data, word: word, page: pagenum, replaceword: data.searchword });
 
-
-                console.log('seach ********** ++++++++++++ ------------', response);
+                console.log('검색 버튼 클릭 결과 ', response);
             });
 
     },
     // 필터 선택시
     FilterData({ commit, state }, { what, whatfield, gte, lt }) {
         var data = state.data;
+
+        data.pagenum = 0;
 
         if (data.class == "all") {
             data.size = config.defaultHomeSize;
@@ -84,25 +86,23 @@ export default {
 
         data[whatfield] = what;
         if (typeof gte == "undefined" || typeof gte == undefined || gte == null || gte == "") {
-            console.log('wwwwwwwwwwww ', data.gte);
         } else {
             data.gte = gte;
         }
         if (typeof lt == "undefined" || typeof lt == undefined || lt == null || lt == "") {
-            console.log('hhhhhhhhhhhhh  ', data.lt);
         } else {
             data.lt = lt;
         }
 
         commit('setTime');
 
-        console.log('fffffffffff333 ', data);
+        console.log('필터 클릭 ', data);
 
         return Search(data)
             .then(response => {
                 commit('SearchData', { what: what, whatfield: whatfield, res: response.data, replaceword: data.searchword });
 
-                console.log('aaaaaaaaaaaaaaa', response);
+                console.log('필터 클릭 결과 ', response);
             });
 
     },
@@ -113,27 +113,22 @@ export default {
         data.pagenum = page * data.size;
 
         data.size = size;
-        console.log("PageSearch 왔다");
-        console.log(page, size);
-        console.log(data);
 
         commit('setTime');
 
-        console.log('fffffffffff444 ', data);
+        console.log('페이지 번호 클릭 ', data);
 
         return Search(data)
             .then(response => {
-                console.log(response);
+                console.log('페이지 번호 클릭 결과 ', response);
                 commit('SearchData', { res: response.data, page: page, size: size, replaceword: data.searchword });
-
-                console.log('aaaaaaaaaaaaaaa', response);
             });
 
     },
     LanguageFetchData({ commit, state }, localevalue) {
         var data = {};
         data["locale"] = localevalue;
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         var sortdata = state.sortdata;
         var getdata = state.data;
         data['total_cnt'] = 0;
@@ -142,14 +137,11 @@ export default {
             data['total_cnt'] = sortdata.total_cnt;
         }
         data.searchword = getdata.searchword;
-        console.log(data, "language");
         data.searchwordarr = state.data.searchwordarr;
-
-        console.log('ffffffffffflanguage ', data);
 
         return GetLanguage(data)
             .then(response => {
-                console.log(response.data);
+                console.log('언어 결과 ', response.data);
                 commit('LanguageData', { data: response.data });
             });
     }

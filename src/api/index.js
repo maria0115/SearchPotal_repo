@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function GetLanguage(data){
+function GetLanguage(data) {
     return axios({
         method: 'post',
         url: `/getlangueges`,
@@ -10,7 +10,7 @@ function GetLanguage(data){
         }
     })
 }
-function Search(data){
+function Search(data) {
     return axios({
         method: 'post',
         url: `/search`,
@@ -20,18 +20,18 @@ function Search(data){
         }
     })
 }
-function keywordofsearch(){
+function keywordofsearch(data) {
     return axios({
         method: 'post',
         url: `/keywordofsearch`,
-        data: JSON.stringify({keyword: "keyword"}),
+        data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         }
     })
 }
 
-export{
+export {
     GetLanguage,
     Search,
     keywordofsearch,
