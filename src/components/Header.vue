@@ -154,7 +154,7 @@
         <a class="btnToggle">{{ language.atthe }}</a>
         <ul class="toggleBox">
           <li class="on">
-            <a @click="SortBtn('', 'fieldname')">{{ language.atthe }}</a>
+            <a @click="SortBtn('all', 'fieldname')">{{ language.atthe }}</a>
           </li>
           <li>
             <a @click="SortBtn('subject', 'fieldname')">{{

@@ -62,14 +62,12 @@ export default new Router({
 
               }
               else if (query.name == 'last') {
-
                 if (remainder > 0) {
                   nowpagechange = totalperpagecnt + 1;
                   page = totalpage + 1;
                 } else {
-                  nowpagechange = totalperpagecnt;
+                  nowpagechange = totalperpagecnt + 1;
                   page = totalpage;
-
                 }
               }
               else if (query.name == 'first') {
@@ -143,9 +141,8 @@ export default new Router({
                   nowpagechange = totalperpagecnt + 1;
                   page = totalpage + 1;
                 } else {
-                  nowpagechange = totalperpagecnt;
+                  nowpagechange = totalperpagecnt + 1;
                   page = totalpage;
-
                 }
               }
               else if (query.name == 'first') {

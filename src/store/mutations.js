@@ -12,11 +12,16 @@ const replaceString = {
                 relanguage.searchresult.replace(new RegExp(replaceword.count), `<span class='highlight'>${cnt}</span>`);
             // 검색어 변환
             var rereplace = '&quot; &quot;';
+
+            if(data.searchwordarr.length >1){
+                replaceword = data.searchwordarr
+            }
+
             if (relanguage.searchresult.indexOf('&quot; &quot;') == -1) {
                 rereplace = `&quot;${replaceword.word}&quot;`;
             }
             relanguage.searchresult =
-                relanguage.searchresult.replace(new RegExp(rereplace), `&quot;${data.searchword}&quot;`);
+                relanguage.searchresult.replace(new RegExp(rereplace), `&quot;${data.searchwordarr}&quot;`);
         }
         return relanguage;
 

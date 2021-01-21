@@ -57,6 +57,9 @@
             <span v-else-if="this.remainder > 0">
               <board-button :vforcnt="perpage + 1"></board-button>
             </span>
+            <span v-else-if="this.remainder == 0">
+              <board-button :vforcnt="perpage"></board-button>
+            </span>
             <span
               v-if="
                 !(this.nowpage == this.totalperpagecnt + 1) &&
