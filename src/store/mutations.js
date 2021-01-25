@@ -14,7 +14,7 @@ const replaceString = {
             var rereplace = '&quot; &quot;';
 
             if (relanguage.searchresult.indexOf('&quot; &quot;') == -1) {
-                rereplace = `&quot;${replaceword.word}&quot;`;
+                rereplace = `&quot;${data.searchwordarr}&quot;`;
             }
             relanguage.searchresult =
                 relanguage.searchresult.replace(new RegExp(rereplace), `&quot;${data.searchwordarr}&quot;`);

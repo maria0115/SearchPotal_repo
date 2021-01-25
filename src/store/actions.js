@@ -68,6 +68,9 @@ export default {
                 dispatch("KeywordOfSearch", { term: state.term });
                 commit('SearchData', { res: response.data, word: word, page: pagenum, replaceword: data.searchword });
 
+                // languageoptionselected
+                dispatch("LanguageFetchData", state.languageoptionselected);
+
                 console.log('검색 버튼 클릭 결과 ', response);
             });
 
@@ -138,6 +141,8 @@ export default {
         }
         data.searchword = getdata.searchword;
         data.searchwordarr = state.data.searchwordarr;
+
+        state.languageoptionselected = localevalue;
 
         return GetLanguage(data)
             .then(response => {
