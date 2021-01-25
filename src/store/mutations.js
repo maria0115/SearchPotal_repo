@@ -35,10 +35,6 @@ export default {
     SearchData(state, { res, word, replaceword, what, whatfield, page, size }) {
         console.log('전체 결과  ', res);
 
-        console.log('approval          ', res.approval);
-        console.log('board          ', res.board);
-        console.log('person          ', res.person);
-
         var result = {};
 
         if (typeof res === 'string') {
@@ -145,11 +141,11 @@ export default {
         var now = moment(); // 지금 이 순간
         state.data.created = now.format("YYYYMMDDTHHmmssZ");
     },
-    // 인기검색어
-    kSearch(state, { res }) {
-        state.kList = res.data;
+    // 검색시 인기검색어, 관련검색어 가져오기
+    setList(state, {popular, relation}){
+        state.kList = popular;
+        state.rList = relation;
 
-        // doc_count 큰 순서대로 정렬
         for (var i = 0; i < state.kList.length; i++) {
             for (var j = i + 1; j < state.kList.length; j++) {
                 if (state.kList[i].key === "") {
@@ -163,5 +159,5 @@ export default {
                 }
             }
         }
-    },
+    }
 }

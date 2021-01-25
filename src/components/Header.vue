@@ -53,6 +53,34 @@
             </router-link>
           </li>
           <li
+            :class="{ on: CategoryOn('person') }"
+            @click="CategoryBtn('person')"
+          >
+            <router-link :to="`/person/person`">
+              {{ language.person }}
+            </router-link>
+          </li>
+          <span v-for="(item, index) in category" :key="index">
+          <li :class="{ on: CategoryOn(item) }" @click="CategoryBtn(item)">
+            <router-link :to="`/board/${item}`">
+              {{ language[item] }}
+            </router-link>
+          </li>
+          </span>
+          <!-- <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
+            <router-link :to="`/all`">
+              {{ language.allsearch }}
+            </router-link>
+          </li>
+          <li
+            :class="{ on: CategoryOn('person') }"
+            @click="CategoryBtn('person')"
+          >
+            <router-link :to="`/person/person`">
+              {{ language.person }}
+            </router-link>
+          </li>
+          <li
             :class="{ on: CategoryOn('approval') }"
             @click="CategoryBtn('approval')"
           >
@@ -67,15 +95,7 @@
             <router-link :to="`/board/board`">
               {{ language.board }}
             </router-link>
-          </li>
-          <li
-            :class="{ on: CategoryOn('person') }"
-            @click="CategoryBtn('person')"
-          >
-            <router-link :to="`/person/person`">
-              {{ language.person }}
-            </router-link>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -183,6 +203,8 @@
 
 <script>
 import { mapState } from "vuex";
+import config from "../config.json";
+
 export default {
   data() {
     return {
@@ -213,12 +235,16 @@ export default {
         if (this.startDate == "") {
           this.startDate = $("input#datepicker1").datepicker().val();
         }
-        this.startDate = moment(new Date(this.startDate)).format("YYYYMMDDHHmmss");
+        this.startDate = moment(new Date(this.startDate)).format(
+          "YYYYMMDDHHmmss"
+        );
         if (this.endDate == "") {
           this.endDate = $("input#datepicker2").datepicker().val();
           // this.endDate = moment(this.endDate).add(1, "days").format("YYYYMMDD");
         }
-        this.endDate = moment(new Date(this.endDate)).add(1, "days").format("YYYYMMDDHHmmss");
+        this.endDate = moment(new Date(this.endDate))
+          .add(1, "days")
+          .format("YYYYMMDDHHmmss");
         if (this.startDate != "") {
           whatDate = this.startDate;
         }
@@ -296,6 +322,9 @@ export default {
       options: (state) => state.languageoption,
       sortdata: (state) => state.sortdata,
     }),
+    category() {
+      return config.category;
+    },
   },
   created() {
     // this.$store.dispatch("LanguageFetchData", "");

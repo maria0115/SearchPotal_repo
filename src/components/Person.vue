@@ -35,8 +35,8 @@
           </span>
         </ul>
         <div class="pagination">
-          {{ sortdata.total_cnt }}
-          {{ nowpage }}
+          <!-- {{ sortdata.total_cnt }}
+          {{ nowpage }} -->
           <ul>
             <span v-if="!(this.nowpage == 1)">
               <li>

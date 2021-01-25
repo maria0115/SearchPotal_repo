@@ -23,7 +23,7 @@ function Search(data) {
 function keywordofsearch(data) {
     return axios({
         method: 'post',
-        url: `/keywordofsearch`,
+        url: `/search`,
         data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'

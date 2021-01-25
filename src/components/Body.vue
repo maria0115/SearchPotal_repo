@@ -26,7 +26,7 @@
           </router-link>
         </span>
       </section>
-      <section class="resultSection">
+      <section class="resultSection" v-if="category.approval">
         <h2 class="boardTitle">{{ language.approval }}</h2>
         <ul class="boardList">
           <span v-if="this.approData">
@@ -53,7 +53,7 @@
           <span @click="setClass('approval')"> MORE </span>
         </router-link>
       </section>
-      <section class="resultSection">
+      <section class="resultSection" v-if="category.board">
         <h2 class="boardTitle">{{ language.board }}</h2>
         <ul class="boardList">
           <span v-if="this.boardData">
@@ -89,6 +89,7 @@
 <script>
 import PageSide from "./PageSide";
 import { mapState } from "vuex";
+import config from "../config.json";
 
 export default {
   components: {
@@ -102,6 +103,9 @@ export default {
       boardData: (state) => state.boardData,
       personData: (state) => state.personData,
     }),
+    category() {
+      return config.category;
+    },
   },
   methods: {
     setClass(className) {

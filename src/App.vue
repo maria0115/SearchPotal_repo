@@ -21,7 +21,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "App",
-   computed: {
+  computed: {
     ...mapState({
       data: (state) => state.data,
     }),
@@ -38,8 +38,10 @@ export default {
     this.data.utc = date.getTimezoneOffset();
     console.log("utc : ", this.data.utc);
 
-    if(this.data.utc === -540){
+    if (this.data.utc === -540) {
       this.$store.dispatch("LanguageFetchData", "ko");
+    } else {
+      this.$store.dispatch("LanguageFetchData", "en");
     }
   },
 };

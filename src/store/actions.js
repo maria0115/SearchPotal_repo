@@ -32,18 +32,6 @@ export default {
     setClass({ state, commit }, className) {
         state.data.class = className;
     },
-    // 인기검색어
-    KeywordOfSearch({ state, commit }, { term }) {
-        commit('setTime');
-        state.term = term;
-        var data = {};
-        data.term = term;
-        data.date = state.data.created;
-        return keywordofsearch(data)
-            .then(response => {
-                commit('kSearch', { res: response });
-            });
-    },
     //검색
     SearchWord({ state, commit, dispatch }, { word }) {
         var data = state.data;
@@ -65,8 +53,10 @@ export default {
 
         return Search(data)
             .then(response => {
-                dispatch("KeywordOfSearch", { term: state.term });
-                commit('SearchData', { res: response.data, word: word, page: pagenum, replaceword: data.searchword });
+                console.log('searchword response   ---------------------------------------  ' , response);
+                
+                commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
+                commit('setList', { popular: response.data.popular, relation: response.data.relation });
 
                 // languageoptionselected
                 dispatch("LanguageFetchData", state.languageoptionselected);

@@ -1,4 +1,8 @@
 {
+  "category": {
+    "approval": "approval",
+    "board": "board"
+  },
   "defaultSize": 3,
   "defaultHomeSize": 2,
   "defaultSort": "desc",

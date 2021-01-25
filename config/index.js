@@ -32,13 +32,6 @@ module.exports = {
           '^/getlangueges': ''
         }
       },
-      '/keywordofsearch': {
-        target: 'http://localhost:4000/keywordofsearch',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/keywordofsearch': ''
-        }
-      },
     },
 
     // Various Dev Server settings
@@ -78,7 +71,7 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: 'emate_search',
     assetsPublicPath: '/',
 
     /**

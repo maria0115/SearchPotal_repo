@@ -2,10 +2,12 @@
   <div class="pageAside">
     <section class="asideSection">
       <h2>연관 검색어</h2>
-      <ol class="relatedList">
-        <li>
-          <a href="#" class="keyword">구매요청</a
-          ><a href="#" class="btnDel"><span class="hidden">삭제</span></a>
+      <ol class="relatedList" v-if="rList.length > 0">
+        <li v-for="(item, index) in rList" :key="index">
+          <a href="#" class="keyword" @click="rSearch(item.key)">{{
+            item.key
+          }}</a>
+          <a href="#" class="btnDel"><span class="hidden">삭제</span></a>
         </li>
       </ol>
     </section>
@@ -19,6 +21,7 @@
         class="popularList tabContent"
         id="popularWeekList"
         style="display: block"
+        v-if="kList.length > 0"
       >
         <li v-for="(item, index) in kList" :key="index">
           <a href="#" v-if="index < 5"
@@ -41,14 +44,15 @@ export default {
     ...mapState({
       language: (state) => state.language,
       kList: (state) => state.kList,
+      rList: (state) => state.rList,
       term: (state) => state.term,
     }),
   },
   created() {
-    this.$store.dispatch("KeywordOfSearch", { term: this.term });
+    // this.$store.dispatch("KeywordOfSearch", { term: this.term });
   },
   methods: {
-    kSearch(keyword) {
+    rSearch(keyword) {
       this.$store.dispatch("SearchWord", { word: keyword });
     },
     kListFilter(term) {
