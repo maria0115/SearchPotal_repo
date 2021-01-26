@@ -12,7 +12,7 @@
             <li v-for="(data, index) in personData.data" :key="index">
               <router-link :to="`/detail/${index} person`">
                 <a href="#">
-                  <span class="thumb"><img :src="data.photo" alt="" /></span>
+                  <span class="thumb"><img src="../portal/images/_emp_thumb_x76_01.png" alt="" /></span>
                   <span class="name kor">{{ data.subject }}</span>
                   <span class="team">{{ data.dept }}</span>
                 </a>

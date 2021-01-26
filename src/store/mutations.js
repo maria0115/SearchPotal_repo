@@ -161,6 +161,7 @@ export default {
         }
     },
     popularList(state, { popular, term }) {
+        console.log('kkkkkkkkkkkkkkkkkkkkkk ', popular);
         state.term = term;
         state.kList = popular;
         for (var i = 0; i < state.kList.length; i++) {

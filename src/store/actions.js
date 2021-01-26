@@ -126,7 +126,7 @@ export default {
         return Search(data)
             .then(response => {
                 console.log('페이지 번호 클릭 결과 ', response);
-                commit('SearchData', { res: response.data, page: page, size: size, replaceword: data.searchword });
+                commit('SearchData', { res: response.data.data, page: page, size: size, replaceword: data.searchword });
             });
 
     },
