@@ -20,10 +20,10 @@ function Search(data) {
         }
     })
 }
-function keywordofsearch(data) {
+function WeekMonth(data) {
     return axios({
         method: 'post',
-        url: `/search`,
+        url: `/popular`,
         data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -34,5 +34,5 @@ function keywordofsearch(data) {
 export {
     GetLanguage,
     Search,
-    keywordofsearch,
+    WeekMonth,
 }

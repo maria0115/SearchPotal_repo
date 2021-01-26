@@ -4,18 +4,22 @@
       <h2>연관 검색어</h2>
       <ol class="relatedList" v-if="rList.length > 0">
         <li v-for="(item, index) in rList" :key="index">
-          <a href="#" class="keyword" @click="rSearch(item.key)">{{
-            item.key
-          }}</a>
-          <a href="#" class="btnDel"><span class="hidden">삭제</span></a>
+          <span v-if="this.clicked">
+            <a href="#" class="keyword" @click="keywordSearch(item.key)">{{
+              item.key
+            }}</a>
+            <a href="#" class="btnDel"><span class="hidden" @click="deleteKeyword">삭제</span></a>
+          </span>
         </li>
       </ol>
     </section>
     <section class="asideSection">
       <h2>인기검색어</h2>
       <ul class="tabMenu">
-        <li class="on"><a href="#" @click="kListFilter('week')">이번주</a></li>
-        <li><a href="#" @click="kListFilter('month')">이번달</a></li>
+        <li class="on">
+          <a href="#" @click="kListFilter('thisWeek')">이번주</a>
+        </li>
+        <li><a href="#" @click="kListFilter('thisMonth')">이번달</a></li>
       </ul>
       <ol
         class="popularList tabContent"
@@ -26,7 +30,7 @@
         <li v-for="(item, index) in kList" :key="index">
           <a href="#" v-if="index < 5"
             ><em class="num">{{ index + 1 }}</em
-            ><span class="keyword" @click="kSearch(item.key)">{{
+            ><span class="keyword" @click="keywordSearch(item.key)">{{
               item.key
             }}</span></a
           >
@@ -40,6 +44,11 @@
 import { mapState } from "vuex";
 
 export default {
+  data() {
+    return {
+      clicked: true,
+    };
+  },
   computed: {
     ...mapState({
       language: (state) => state.language,
@@ -49,14 +58,17 @@ export default {
     }),
   },
   created() {
-    // this.$store.dispatch("KeywordOfSearch", { term: this.term });
+    this.$store.dispatch("KSearch", { term: this.term });
   },
   methods: {
-    rSearch(keyword) {
+    keywordSearch(keyword) {
       this.$store.dispatch("SearchWord", { word: keyword });
     },
     kListFilter(term) {
-      this.$store.dispatch("KeywordOfSearch", { term: term });
+      this.$store.dispatch("KSearch", { term: term });
+    },
+    deleteKeyword(){
+      this.clicked = false;
     },
   },
 };

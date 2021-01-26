@@ -32,6 +32,13 @@ module.exports = {
           '^/getlangueges': ''
         }
       },
+      '/popular': {
+        target: 'http://localhost:4000/popular',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/popular': ''
+        }
+      },
     },
 
     // Various Dev Server settings

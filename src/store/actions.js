@@ -1,4 +1,4 @@
-import { GetLanguage, Search, keywordofsearch } from '../api/index.js';
+import { GetLanguage, Search, WeekMonth } from '../api/index.js';
 import config from '../config.json';
 export default {
     // 헤더에 있는 메뉴 클릭시 카테고리 변경
@@ -19,9 +19,10 @@ export default {
 
         return Search(data)
             .then(response => {
-                commit('BigCategory', { res: response, category: category });
+                commit('BigCategory', { res: response.data, category: category });
+
                 commit('SearchData', {
-                    res: response.data, word: state.data.searchword, page: state.data.pagenum,
+                    res: response.data.data, word: state.data.searchword, page: state.data.pagenum,
                     replaceword: state.data.searchword, what: state.data.what, whatfield: state.data.whatfield
                 });
 
@@ -53,8 +54,8 @@ export default {
 
         return Search(data)
             .then(response => {
-                console.log('searchword response   ---------------------------------------  ' , response);
-                
+                console.log('searchword response   ---------------------------------------  ', response);
+
                 commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });
 
@@ -64,6 +65,14 @@ export default {
                 console.log('검색 버튼 클릭 결과 ', response);
             });
 
+    },
+    KSearch({ state, commit }, { term }) {
+        state.term = term;
+
+        return WeekMonth({ term })
+            .then(reponse => {
+                commit('popularList', { popular: response.data.popular });
+            });
     },
     // 필터 선택시
     FilterData({ commit, state }, { what, whatfield, gte, lt }) {
@@ -93,7 +102,7 @@ export default {
 
         return Search(data)
             .then(response => {
-                commit('SearchData', { what: what, whatfield: whatfield, res: response.data, replaceword: data.searchword });
+                commit('SearchData', { what: what, whatfield: whatfield, res: response.data.data, replaceword: data.searchword });
 
                 console.log('필터 클릭 결과 ', response);
             });

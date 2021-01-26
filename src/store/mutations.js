@@ -122,6 +122,10 @@ export default {
         state.approData = state.sortdata.approval;
         state.boardData = state.sortdata.board;
         state.personData = state.sortdata.person;
+
+        console.log(' ddddddddd  ddddd  ', state.approData);
+        console.log(' ddddddddd  ddddd  ', state.boardData);
+        console.log(' ddddddddd  ddddd  ', state.personData);
     },
     // 다국어
     LanguageData(state, { data }) {
@@ -142,7 +146,7 @@ export default {
         state.data.created = now.format("YYYYMMDDTHHmmssZ");
     },
     // 검색시 인기검색어, 관련검색어 가져오기
-    setList(state, {popular, relation}){
+    setList(state, { popular, relation }) {
         state.kList = popular;
         state.rList = relation;
 
@@ -159,5 +163,8 @@ export default {
                 }
             }
         }
+    },
+    popularList(state, { popular }) {
+        state.kList = popular;
     }
 }

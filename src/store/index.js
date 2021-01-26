@@ -9,7 +9,7 @@ export const store = new VueX.Store({
     state: {
         rList: {},
         kList: {},
-        term: "week",
+        term: "thisWeek",
         sortdata: {},
         approData: {},
         boardData: {},
