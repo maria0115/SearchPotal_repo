@@ -12,8 +12,9 @@ export default {
             data.size = config.defaultSize;
         }
         data.class = category;
-
+        
         commit('setTime');
+        data.term = state.term;
 
         console.log('헤더 클릭 ', data);
 
@@ -47,6 +48,7 @@ export default {
         }
         var pagenum = config.defaultPageNum - 1;
         data.pagenum = pagenum;
+        data.term = state.term;
 
         commit('setTime');
 
@@ -67,11 +69,10 @@ export default {
 
     },
     KSearch({ state, commit }, { term }) {
-        state.term = term;
-
         return WeekMonth({ term })
-            .then(reponse => {
-                commit('popularList', { popular: response.data.popular });
+            .then(response => {
+                console.log('ttttttttttttttttttttt  ', response.data);
+                commit('popularList', { popular: response.data, term: term });
             });
     },
     // 필터 선택시
@@ -97,6 +98,7 @@ export default {
         }
 
         commit('setTime');
+        data.term = state.term;
 
         console.log('필터 클릭 ', data);
 
@@ -117,6 +119,7 @@ export default {
         data.size = size;
 
         commit('setTime');
+        data.term = state.term;
 
         console.log('페이지 번호 클릭 ', data);
 

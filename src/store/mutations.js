@@ -122,10 +122,6 @@ export default {
         state.approData = state.sortdata.approval;
         state.boardData = state.sortdata.board;
         state.personData = state.sortdata.person;
-
-        console.log(' ddddddddd  ddddd  ', state.approData);
-        console.log(' ddddddddd  ddddd  ', state.boardData);
-        console.log(' ddddddddd  ddddd  ', state.personData);
     },
     // 다국어
     LanguageData(state, { data }) {
@@ -164,7 +160,21 @@ export default {
             }
         }
     },
-    popularList(state, { popular }) {
+    popularList(state, { popular, term }) {
+        state.term = term;
         state.kList = popular;
+        for (var i = 0; i < state.kList.length; i++) {
+            for (var j = i + 1; j < state.kList.length; j++) {
+                if (state.kList[i].key === "") {
+                    state.kList.splice(i, 1);
+                } else {
+                    if (state.kList[i].doc_count < state.kList[j].doc_count) {
+                        var temp = state.kList[i];
+                        state.kList[i] = state.kList[j];
+                        state.kList[j] = temp;
+                    }
+                }
+            }
+        }
     }
 }

@@ -3,13 +3,13 @@
     <section class="asideSection">
       <h2>연관 검색어</h2>
       <ol class="relatedList" v-if="rList.length > 0">
-        <li v-for="(item, index) in rList" :key="index">
-          <span v-if="this.clicked">
-            <a href="#" class="keyword" @click="keywordSearch(item.key)">{{
-              item.key
-            }}</a>
-            <a href="#" class="btnDel"><span class="hidden" @click="deleteKeyword">삭제</span></a>
-          </span>
+        <li v-for="(item, index) in this.rList" :key="index">
+          <a href="#" class="keyword" @click="keywordSearch(item.key)">{{
+            item.key
+          }}</a>
+          <a href="#" class="btnDel" @click="deleteKeyword(index)"
+            ><span class="hidden">삭제</span></a
+          >
         </li>
       </ol>
     </section>
@@ -44,11 +44,6 @@
 import { mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      clicked: true,
-    };
-  },
   computed: {
     ...mapState({
       language: (state) => state.language,
@@ -67,8 +62,8 @@ export default {
     kListFilter(term) {
       this.$store.dispatch("KSearch", { term: term });
     },
-    deleteKeyword(){
-      this.clicked = false;
+    deleteKeyword(index) {
+      this.rList.splice(index, 1);
     },
   },
 };
