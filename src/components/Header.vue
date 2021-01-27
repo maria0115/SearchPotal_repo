@@ -220,6 +220,7 @@ export default {
       else false;
     },
     btnSearch() {
+      this.searchname = this.searchname.trim();
       this.$store.dispatch("SearchWord", { word: this.searchname });
     },
     CategoryBtn(category) {

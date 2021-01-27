@@ -1,5 +1,6 @@
 <template>
   <div class="pageContainer">
+    <spinner :loading="tf"></spinner>
     <div class="pageContent">
       <section class="resultSection">
         <h2 class="empInfoTitle">{{ language.person }}</h2>
@@ -102,7 +103,6 @@ import BoardButton from "./BoardButton.vue";
 import { mapState } from "vuex";
 import config from "../config.json";
 import Spinner from "./Spinner.vue";
-import bus from "../utils/bus.js";
 
 export default {
   computed: {
@@ -116,35 +116,13 @@ export default {
       remainder: (state) => state.remainder,
       language: (state) => state.language,
       category: (state) => state.data.class,
+      tf: (state) => state.tf,
     }),
   },
   components: {
     PageSide,
     Spinner,
     BoardButton,
-  },
-  created() {
-    bus.$on("on:progress", this.onProgress);
-  },
-  mounted() {
-    bus.$on("off:progress", this.offProgress);
-  },
-  beforeDestroy() {
-    bus.$off("on:progress");
-    bus.$off("off:progress");
-  },
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  methods: {
-    onProgress() {
-      this.loading = true;
-    },
-    offProgress() {
-      this.loading = false;
-    },
   },
 };
 </script>

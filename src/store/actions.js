@@ -3,6 +3,7 @@ import config from '../config.json';
 export default {
     // 헤더에 있는 메뉴 클릭시 카테고리 변경
     BigCategory({ state, commit }, category) {
+        state.tf = true;
         console.log('bigcategory', category);
         var data = state.data;
         data.pagenum = config.defaultPageNum - 1;
@@ -29,6 +30,8 @@ export default {
                 });
 
                 console.log('헤더 클릭 결과 ', response);
+
+                state.tf = false;
             });
     },
     // 카테고리
@@ -37,6 +40,7 @@ export default {
     },
     //검색
     SearchWord({ state, commit, dispatch }, { word }) {
+        state.tf = true;
         var data = state.data;
         if (word !== undefined) {
             data.searchword = word;
@@ -79,6 +83,7 @@ export default {
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });
 
                 dispatch("LanguageFetchData", state.languageoptionselected);
+                state.tf = false;
             });
 
     },
