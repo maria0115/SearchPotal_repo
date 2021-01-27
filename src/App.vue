@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <spinner :loading="tf"></spinner>
     <div class="page">
       <Header></Header>
       <router-view />
@@ -17,6 +18,7 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Person from "./components/Person";
+import Spinner from "./components/Spinner.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -24,6 +26,7 @@ export default {
   computed: {
     ...mapState({
       data: (state) => state.data,
+      tf: (state) => state.tf,
     }),
   },
   components: {
@@ -31,6 +34,7 @@ export default {
     Body,
     Footer,
     Person,
+    Spinner,
   },
   created() {
     var date = new Date();

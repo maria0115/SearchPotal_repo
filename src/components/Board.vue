@@ -1,6 +1,6 @@
 <template>
   <div class="pageContainer">
-    <spinner :loading="loading"></spinner>
+    <!-- <spinner :loading="loading"></spinner> -->
     <div class="pageContent">
       <section class="resultSection">
         <h2 class="boardTitle">{{ language[category] }}</h2>
@@ -117,8 +117,8 @@ import PageSide from "./PageSide";
 import BoardButton from "./BoardButton.vue";
 import { mapState } from "vuex";
 import config from "../config.json";
-import Spinner from "./Spinner.vue";
-import bus from "../utils/bus.js";
+// import Spinner from "./Spinner.vue";
+// import bus from "../utils/bus.js";
 export default {
   computed: {
     ...mapState({
@@ -136,32 +136,32 @@ export default {
   },
   components: {
     PageSide,
-    Spinner,
     BoardButton,
+    // Spinner,
   },
-  created() {
-    bus.$on("on:progress", this.onProgress);
-  },
-  mounted() {
-    bus.$on("off:progress", this.offProgress);
-  },
-  beforeDestroy() {
-    bus.$off("on:progress");
-    bus.$off("off:progress");
-  },
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  methods: {
-    onProgress() {
-      this.loading = true;
-    },
-    offProgress() {
-      this.loading = false;
-    },
-  },
+  // created() {
+  //   bus.$on("on:progress", this.onProgress);
+  // },
+  // mounted() {
+  //   bus.$on("off:progress", this.offProgress);
+  // },
+  // beforeDestroy() {
+  //   bus.$off("on:progress");
+  //   bus.$off("off:progress");
+  // },
+  // data() {
+  //   return {
+  //     loading: false,
+  //   };
+  // },
+  // methods: {
+  //   onProgress() {
+  //     this.loading = true;
+  //   },
+  //   offProgress() {
+  //     this.loading = false;
+  //   },
+  // },
 };
 </script>
 

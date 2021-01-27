@@ -1,6 +1,5 @@
 <template>
   <div class="pageContainer">
-    <spinner :loading="tf"></spinner>
     <div class="pageContent">
       <section class="resultSection">
         <h2 class="empInfoTitle">{{ language.person }}</h2>
@@ -102,7 +101,6 @@ import PageSide from "./PageSide";
 import BoardButton from "./BoardButton.vue";
 import { mapState } from "vuex";
 import config from "../config.json";
-import Spinner from "./Spinner.vue";
 
 export default {
   computed: {
@@ -116,12 +114,10 @@ export default {
       remainder: (state) => state.remainder,
       language: (state) => state.language,
       category: (state) => state.data.class,
-      tf: (state) => state.tf,
     }),
   },
   components: {
     PageSide,
-    Spinner,
     BoardButton,
   },
 };

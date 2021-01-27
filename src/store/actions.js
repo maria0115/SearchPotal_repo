@@ -131,6 +131,7 @@ export default {
     },
     // 페이지
     PageSearch({ commit, state }, { page, size }) {
+        state.tf = true;
         var data = state.data;
         // data.pagenum = page;
         data.pagenum = page * data.size;
@@ -146,6 +147,7 @@ export default {
             .then(response => {
                 console.log('페이지 번호 클릭 결과 ', response);
                 commit('SearchData', { res: response.data.data, page: page, size: size, replaceword: data.searchword });
+                state.tf = false;
             });
 
     },

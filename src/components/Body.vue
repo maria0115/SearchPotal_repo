@@ -1,6 +1,5 @@
 <template>
   <div class="pageContainer">
-    <spinner :loading="tf"></spinner>
     <div class="pageContent">
       <section class="resultSection">
         <h2 class="title">
@@ -89,14 +88,12 @@
 
 <script>
 import PageSide from "./PageSide";
-import Spinner from "./Spinner";
 import { mapState } from "vuex";
 import config from "../config.json";
 
 export default {
   components: {
     PageSide,
-    Spinner,
   },
   computed: {
     ...mapState({
@@ -105,7 +102,6 @@ export default {
       approData: (state) => state.approData,
       boardData: (state) => state.boardData,
       personData: (state) => state.personData,
-      tf: (state) => state.tf,
     }),
     category() {
       return config.category;

@@ -3,8 +3,8 @@
     "approval": "approval",
     "board": "board"
   },
-  "defaultSize": 3,
-  "defaultHomeSize": 2,
+  "defaultSize": 10,
+  "defaultHomeSize": 3,
   "defaultSort": "desc",
   "what": [
     "created",
@@ -23,6 +23,6 @@
   ],
   "defaultPageNum": 1,
   "defaultNowPage": 1,
-  "defaultPageCnt": 7,
+  "defaultPageCnt": 10,
   "timezone": -540
 }
