@@ -7,7 +7,7 @@
           <a href="#" class="keyword" @click="keywordSearch(item.key)">{{
             item.key
           }}</a>
-          <a href="#" class="btnDel" @click="deleteKeyword(index)"
+          <a class="btnDel" @click="deleteKeyword(index)"
             ><span class="hidden">삭제</span></a
           >
         </li>
@@ -17,9 +17,9 @@
       <h2>인기검색어</h2>
       <ul class="tabMenu">
         <li class="on">
-          <a href="#" @click="kListFilter('thisWeek')">이번주</a>
+          <a @click="kListFilter('thisWeek')">이번주</a>
         </li>
-        <li><a href="#" @click="kListFilter('thisMonth')">이번달</a></li>
+        <li><a @click="kListFilter('thisMonth')">이번달</a></li>
       </ul>
       <ol
         class="popularList tabContent"
