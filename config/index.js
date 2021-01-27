@@ -18,13 +18,6 @@ module.exports = {
           '^/search': ''
         }
       },
-      '/create': {
-        target: 'http://localhost:4000/create',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/create': ''
-        }
-      },
       '/getlangueges': {
         target: 'http://localhost:4000/getlangueges',
         changeOrigin: true,
@@ -39,6 +32,13 @@ module.exports = {
           '^/popular': ''
         }
       },
+      // '/create': {
+      //   target: 'http://localhost:4000/create',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/create': ''
+      //   }
+      // },
     },
 
     // Various Dev Server settings

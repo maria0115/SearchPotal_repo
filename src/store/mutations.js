@@ -76,6 +76,7 @@ export default {
         state.boardData = state.sortdata.board;
         state.personData = state.sortdata.person;
 
+        // 전체 결과 건수
         state.sortdata.total_cnt = 0;
         if (state.approData) {
             state.sortdata.total_cnt += state.approData.total_cnt;
@@ -146,6 +147,7 @@ export default {
         state.kList = popular;
         state.rList = relation;
 
+        // 인기순 정렬
         for (var i = 0; i < state.kList.length; i++) {
             for (var j = i + 1; j < state.kList.length; j++) {
                 if (state.kList[i].key === "") {
@@ -160,10 +162,12 @@ export default {
             }
         }
     },
+    // 인기검색어
     popularList(state, { popular, term }) {
-        console.log('kkkkkkkkkkkkkkkkkkkkkk ', popular);
         state.term = term;
         state.kList = popular;
+
+        // 인기순 정렬
         for (var i = 0; i < state.kList.length; i++) {
             for (var j = i + 1; j < state.kList.length; j++) {
                 if (state.kList[i].key === "") {

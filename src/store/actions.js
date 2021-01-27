@@ -6,13 +6,14 @@ export default {
         console.log('bigcategory', category);
         var data = state.data;
         data.pagenum = config.defaultPageNum - 1;
+        // 전체 검색일 때 size
         if (category == "all") {
             data.size = config.defaultHomeSize;
         } else {
             data.size = config.defaultSize;
         }
         data.class = category;
-        
+
         commit('setTime');
         data.term = state.term;
 
@@ -50,28 +51,30 @@ export default {
         data.pagenum = pagenum;
         data.term = state.term;
 
+        if (data.class === "all") {
+            data.size = config.defaultHomeSize;
+            state.data.size = data.size;
+        }
+
         commit('setTime');
 
         console.log('검색 버튼 클릭 ', data);
 
         return Search(data)
             .then(response => {
-                console.log('searchword response   ---------------------------------------  ', response);
+                console.log('검색 버튼 클릭 결과 ', response);
 
                 commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });
 
-                // languageoptionselected
                 dispatch("LanguageFetchData", state.languageoptionselected);
-
-                console.log('검색 버튼 클릭 결과 ', response);
             });
 
     },
+    // 인기검색어 필터
     KSearch({ state, commit }, { term }) {
         return WeekMonth({ term })
             .then(response => {
-                console.log('ttttttttttttttttttttt  ', response.data);
                 commit('popularList', { popular: response.data, term: term });
             });
     },
@@ -130,6 +133,7 @@ export default {
             });
 
     },
+    // 언어
     LanguageFetchData({ commit, state }, localevalue) {
         var data = {};
         data["locale"] = localevalue;

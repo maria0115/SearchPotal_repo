@@ -7,13 +7,13 @@ Vue.use(VueX);
 
 export const store = new VueX.Store({
     state: {
-        rList: {},
-        kList: {},
-        term: "thisWeek",
-        sortdata: {},
-        approData: {},
-        boardData: {},
-        personData: {},
+        rList: {}, // 관련검색어
+        kList: {}, // 인기검색어
+        term: "thisWeek", // 인기검색어 필터
+        sortdata: {}, // 받아온 전체 데이터
+        approData: {}, // 전자결재 데이터
+        boardData: {}, // 게시판 데이터
+        personData: {}, // 임직원 데이터
         data: {
             from: 1, // 받아온 데이터의 page
             size: config.defaultSize,
