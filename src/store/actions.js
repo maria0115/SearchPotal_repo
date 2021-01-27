@@ -45,6 +45,17 @@ export default {
             } else {
                 data.searchwordarr = [];
                 data.searchwordarr.push(word);
+                 
+                var count = 0;
+                for(var i=0; i<=word.length; i++){
+                  var sword = word.split(" ");
+                  if(sword[i]==""){
+                      if(count==word.length){
+                          data.searchwordarr = [];
+                      }
+                      count+=1;
+                  }
+                }
             }
         }
         var pagenum = config.defaultPageNum - 1;
