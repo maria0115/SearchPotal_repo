@@ -7,7 +7,8 @@
           <span v-if="this.personData">
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in personData.data" :key="index">
-              <router-link :to="`/detail/${index} person`">
+              <!-- <router-link :to="`/detail/${index} person`"> -->
+              <a :href="'http:\/\/' + data.originalurl" target="blank">
                 <div class="profile">
                   <div class="thumb">
                     <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
@@ -30,7 +31,8 @@
                 <div class="work">
                   <span>담당업무: {{ data.job }}</span>
                 </div>
-              </router-link>
+              </a>
+              <!-- </router-link> -->
             </li>
           </span>
         </ul>

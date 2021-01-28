@@ -10,20 +10,20 @@
             <span v-if="approData">
               <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in approData.data" :key="index">
-                <router-link :to="`/detail/${index} approval`">
-                  <a href="#">
-                    <span class="location">{{ data.nav }}</span>
-                    <span class="subject">{{ data.subject }}</span>
-                    <span class="write"
-                      >{{ data.author }} / {{ data.dept }}
-                      <span class="date">{{ data.created }}</span></span
-                    >
-                    <span class="content">{{ data.body }}</span>
-                    <span class="attch"
-                      ><span class="hidden">첨부파일</span></span
-                    >
-                  </a>
-                </router-link>
+                <!-- <router-link :to="`/detail/${index} approval`"> -->
+                <a :href="'http:\/\/' + data.originalurl" target="blank">
+                  <span class="location">{{ data.nav }}</span>
+                  <span class="subject">{{ data.subject }}</span>
+                  <span class="write"
+                    >{{ data.author }} / {{ data.dept }}
+                    <span class="date">{{ getTime(data.created) }}</span></span
+                  >
+                  <span class="content">{{ data.body }}</span>
+                  <span class="attch"
+                    ><span class="hidden">첨부파일</span></span
+                  >
+                </a>
+                <!-- </router-link> -->
               </li>
             </span>
           </span>
@@ -31,20 +31,20 @@
             <span v-if="boardData">
               <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in boardData.data" :key="index">
-                <router-link :to="`/detail/${index} board`">
-                  <a href="#">
-                    <span class="location">{{ data.from }}</span>
-                    <span class="subject">{{ data.subject }}</span>
-                    <span class="write"
-                      >{{ data.author }} / {{ data.dept }}
-                      <span class="date">{{ data.created }}</span></span
-                    >
-                    <span class="content">{{ data.body }}</span>
-                    <span class="attch"
-                      ><span class="hidden">첨부파일</span></span
-                    >
-                  </a>
-                </router-link>
+                <!-- <router-link :to="`/detail/${index} board`"> -->
+                <a :href="'http:\/\/' + data.originalurl" target="blank">
+                  <span class="location">{{ data.from }}</span>
+                  <span class="subject">{{ data.subject }}</span>
+                  <span class="write"
+                    >{{ data.author }} / {{ data.dept }}
+                    <span class="date">{{ getTime(data.created) }}</span></span
+                  >
+                  <span class="content">{{ data.body }}</span>
+                  <span class="attch"
+                    ><span class="hidden">첨부파일</span></span
+                  >
+                </a>
+                <!-- </router-link> -->
               </li>
             </span>
           </span>
@@ -138,6 +138,14 @@ export default {
     PageSide,
     BoardButton,
     // Spinner,
+  },
+  methods: {
+    getTime(date) {
+      var moment = require("moment");
+      var localTime = moment.utc(date).toDate();
+      localTime = moment(localTime).format("YYYYMMDDTHHmmss");
+      return localTime;
+    },
   },
   // created() {
   //   bus.$on("on:progress", this.onProgress);

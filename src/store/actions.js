@@ -49,16 +49,16 @@ export default {
             } else {
                 data.searchwordarr = [];
                 data.searchwordarr.push(word);
-                 
+
                 var count = 0;
-                for(var i=0; i<=word.length; i++){
-                  var sword = word.split(" ");
-                  if(sword[i]==""){
-                      if(count==word.length){
-                          data.searchwordarr = [];
-                      }
-                      count+=1;
-                  }
+                for (var i = 0; i <= word.length; i++) {
+                    var sword = word.split(" ");
+                    if (sword[i] == "") {
+                        if (count == word.length) {
+                            data.searchwordarr = [];
+                        }
+                        count += 1;
+                    }
                 }
             }
         }
@@ -89,7 +89,8 @@ export default {
     },
     // 인기검색어 필터
     KSearch({ state, commit }, { term }) {
-        return WeekMonth({ term })
+        commit('setTime');
+        return WeekMonth({ term: term, created: state.data.created })
             .then(response => {
                 commit('popularList', { popular: response.data, term: term });
             });

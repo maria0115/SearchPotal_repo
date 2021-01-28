@@ -138,9 +138,15 @@ export default {
     },
     // 시간 설정
     setTime(state) {
+        // 지금 이 순간
         var moment = require("moment");
-        var now = moment(); // 지금 이 순간
-        state.data.created = now.format("YYYYMMDDTHHmmssZ");
+        state.data.created = moment().utc().format("YYYYMMDDTHHmmss");
+        
+        // // 받아온 created에 +09:00
+        // var moment = require("moment");
+        // for (var i = 0; i < state.sortdata.length; i++) {
+        //     state.sortdata[i].created = moment(state.sortdata[i].created).add(9, "h").format("YYYYMMDDTHHmmssZ");
+        // }
     },
     // 검색시 인기검색어, 관련검색어 가져오기
     setList(state, { popular, relation }) {
