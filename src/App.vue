@@ -43,11 +43,11 @@ export default {
     console.log("utc : ", this.data.utc);
 
     // 언어 설정
-    if (this.data.utc === -540) {
-      this.$store.dispatch("LanguageFetchData", "ko");
-    } else {
-      this.$store.dispatch("LanguageFetchData", "en");
-    }
+    // if (this.data.utc === -540) {
+    //   this.$store.dispatch("LanguageFetchData", "ko");
+    // } else {
+    //   this.$store.dispatch("LanguageFetchData", "en");
+    // }
   },
 };
 </script>

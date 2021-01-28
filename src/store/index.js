@@ -35,7 +35,7 @@ export const store = new VueX.Store({
         //다국어
         language: {},
         languageoption: config.options,
-        languageoptionselected: "ko",
+        languageoptionselected: "",
         replaceword: { count: 0, word: "" },
         // 전자결제 페이지
         nowpage: 1,
