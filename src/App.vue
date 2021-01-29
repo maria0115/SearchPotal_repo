@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <a href="http://localhost/homepage.nsf?logout" @click="deleteCookies()"
+      >logout</a
+    >
     <spinner :loading="tf"></spinner>
     <div class="page">
       <Header></Header>
@@ -48,6 +51,15 @@ export default {
     // } else {
     //   this.$store.dispatch("LanguageFetchData", "en");
     // }
+  },
+  methods: {
+    deleteCookies() {
+      console.log("ddddddddddddddddddd ", document.cookie);
+      document.cookie = "language=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie =
+        "DomAuthSessId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      console.log("hhhhhhhhhhhhh ", document.cookie);
+    },
   },
 };
 </script>
