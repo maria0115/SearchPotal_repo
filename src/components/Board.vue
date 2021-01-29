@@ -11,11 +11,14 @@
               <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in approData.data" :key="index">
                 <!-- <router-link :to="`/detail/${index} approval`"> -->
-                <a :href="'http:\/\/' + data.originalurl" target="blank">
+                <a
+                  :href="url + data.originalurl"
+                  target="blank"
+                >
                   <span class="location">{{ data.nav }}</span>
                   <span class="subject">{{ data.subject }}</span>
                   <span class="write"
-                    >{{ data.author }} / {{ data.dept }}
+                    >{{ data.author }} / {{ setDept(data.dept) }}
                     <span class="date">{{ getTime(data.created) }}</span></span
                   >
                   <span class="content">{{ data.body }}</span>
@@ -32,11 +35,14 @@
               <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in boardData.data" :key="index">
                 <!-- <router-link :to="`/detail/${index} board`"> -->
-                <a :href="'http:\/\/' + data.originalurl" target="blank">
+                <a
+                  :href="url + data.originalurl"
+                  target="blank"
+                >
                   <span class="location">{{ data.from }}</span>
                   <span class="subject">{{ data.subject }}</span>
                   <span class="write"
-                    >{{ data.author }} / {{ data.dept }}
+                    >{{ data.author }} / {{ setDept(data.dept) }}
                     <span class="date">{{ getTime(data.created) }}</span></span
                   >
                   <span class="content">{{ data.body }}</span>
@@ -133,6 +139,9 @@ export default {
       language: (state) => state.language,
       category: (state) => state.data.class,
     }),
+    url() {
+      return config.url;
+    },
   },
   components: {
     PageSide,
@@ -145,6 +154,12 @@ export default {
       var localTime = moment.utc(date).toDate();
       localTime = moment(localTime).format("YYYYMMDDTHHmmss");
       return localTime;
+    },
+    setDept(dept) {
+      if (typeof dept === "object") {
+        dept = dept[this.language.locale];
+      }
+      return dept;
     },
   },
   // created() {

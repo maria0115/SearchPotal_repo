@@ -8,14 +8,17 @@
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in personData.data" :key="index">
               <!-- <router-link :to="`/detail/${index} person`"> -->
-              <a :href="'http:\/\/' + data.originalurl" target="blank">
+              <a
+                :href="url + data.originalurl"
+                target="blank"
+              >
                 <div class="profile">
                   <div class="thumb">
                     <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
                   </div>
                   <div class="name kor">{{ data.subject }}</div>
                 </div>
-                <div class="dept">{{ data.dept }}</div>
+                <div class="dept">{{ setDept(data.dept) }}</div>
                 <div class="pos">
                   <span>직급: {{ data.jobTitle }}</span>
                   <span>직책: {{ data.jobPosition }}</span>
@@ -116,11 +119,23 @@ export default {
       remainder: (state) => state.remainder,
       language: (state) => state.language,
       category: (state) => state.data.class,
+      languageoptionselected: (state) => state.languageoptionselected,
     }),
+    url() {
+      return config.url;
+    },
   },
   components: {
     PageSide,
     BoardButton,
+  },
+  methods: {
+    setDept(dept) {
+      if (typeof dept === "object") {
+        dept = dept[this.language.locale];
+      }
+      return dept;
+    },
   },
 };
 </script>

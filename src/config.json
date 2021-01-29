@@ -3,6 +3,7 @@
     "approval": "approval",
     "board": "board"
   },
+  "url": "http://kms.saerom.co.kr",
   "defaultSize": 10,
   "defaultHomeSize": 3,
   "defaultSort": "desc",
