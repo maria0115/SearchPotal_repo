@@ -11,14 +11,11 @@
               <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in approData.data" :key="index">
                 <!-- <router-link :to="`/detail/${index} approval`"> -->
-                <a
-                  :href="url + data.originalurl"
-                  target="blank"
-                >
+                <a :href="url + data.originalurl" target="blank">
                   <span class="location">{{ data.nav }}</span>
                   <span class="subject">{{ data.subject }}</span>
                   <span class="write"
-                    >{{ data.author }} / {{ setDept(data.dept) }}
+                    >{{ setWord(data.author) }} / {{ setWord(data.dept) }}
                     <span class="date">{{ getTime(data.created) }}</span></span
                   >
                   <span class="content">{{ data.body }}</span>
@@ -35,14 +32,11 @@
               <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in boardData.data" :key="index">
                 <!-- <router-link :to="`/detail/${index} board`"> -->
-                <a
-                  :href="url + data.originalurl"
-                  target="blank"
-                >
+                <a :href="url + data.originalurl" target="blank">
                   <span class="location">{{ data.from }}</span>
                   <span class="subject">{{ data.subject }}</span>
                   <span class="write"
-                    >{{ data.author }} / {{ setDept(data.dept) }}
+                    >{{ setWord(data.author) }} / {{ setWord(data.dept) }}
                     <span class="date">{{ getTime(data.created) }}</span></span
                   >
                   <span class="content">{{ data.body }}</span>
@@ -155,11 +149,14 @@ export default {
       localTime = moment(localTime).format("YYYYMMDDTHHmmss");
       return localTime;
     },
-    setDept(dept) {
-      if (typeof dept === "object") {
-        dept = dept[this.language.locale];
+    setWord(word) {
+      if (word.includes(this.language.locale)) {
+        if (JSON.parse(word).ko.length > 0) {
+          word = JSON.parse(word)[this.language.locale];
+        }
       }
-      return dept;
+
+      return word;
     },
   },
   // created() {

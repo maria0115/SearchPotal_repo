@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <a href="http://localhost/homepage.nsf?logout" @click="deleteCookies()"
-      >logout</a
-    >
     <spinner :loading="tf"></spinner>
     <div class="page">
       <Header></Header>
@@ -38,28 +35,6 @@ export default {
     Footer,
     Person,
     Spinner,
-  },
-  created() {
-    var date = new Date();
-    date.getTimezoneOffset();
-    this.data.utc = date.getTimezoneOffset();
-    console.log("utc : ", this.data.utc);
-
-    // 언어 설정
-    // if (this.data.utc === -540) {
-    //   this.$store.dispatch("LanguageFetchData", "ko");
-    // } else {
-    //   this.$store.dispatch("LanguageFetchData", "en");
-    // }
-  },
-  methods: {
-    deleteCookies() {
-      console.log("ddddddddddddddddddd ", document.cookie);
-      document.cookie = "language=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      document.cookie =
-        "DomAuthSessId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      console.log("hhhhhhhhhhhhh ", document.cookie);
-    },
   },
 };
 </script>

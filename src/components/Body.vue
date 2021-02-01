@@ -11,15 +11,12 @@
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in personData.data" :key="index">
               <!-- <router-link :to="`/detail/${index} person`"> -->
-              <a
-                :href="url + data.originalurl"
-                target="blank"
-              >
+              <a :href="url + data.originalurl" target="blank">
                 <span class="thumb"
                   ><img src="../portal/images/_emp_thumb_x76_01.png" alt=""
                 /></span>
                 <span class="name kor">{{ data.subject }}</span>
-                <span class="team">{{ setDept(data.dept) }}</span>
+                <span class="team">{{ setWord(data.dept) }}</span>
               </a>
               <!-- </router-link> -->
             </li>
@@ -38,14 +35,11 @@
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in approData.data" :key="index">
               <!-- <router-link :to="`/detail/${index} approval`"> -->
-              <a
-                :href="url + data.originalurl"
-                target="blank"
-              >
-                <span class="location">{{ setDept(data.dept) }}</span>
+              <a :href="url + data.originalurl" target="blank">
+                <span class="location">{{ setWord(data.dept) }}</span>
                 <span class="subject">{{ data.subject }}</span>
                 <span class="write"
-                  >{{ data.nav }}
+                  >{{ setWord(data.author) }}
                   <span class="date">{{ getTime(data.created) }}</span></span
                 >
                 <span class="content">{{ data.body }}</span>
@@ -66,14 +60,11 @@
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in boardData.data" :key="index">
               <!-- <router-link :to="`/detail/${index} board`"> -->
-              <a
-                :href="url + data.originalurl"
-                target="blank"
-              >
-                <span class="location">{{ setDept(data.dept) }}</span>
+              <a :href="url + data.originalurl" target="blank">
+                <span class="location">{{ setWord(data.dept) }}</span>
                 <span class="subject">{{ data.subject }}</span>
                 <span class="write"
-                  >{{ data.author }}
+                  >{{ setWord(data.author) }}
                   <span class="date">{{ getTime(data.created) }}</span></span
                 >
                 <span class="content">{{ data.body }}</span>
@@ -126,18 +117,19 @@ export default {
     getTime(date) {
       var moment = require("moment");
       var localTime = moment.utc(date).toDate();
-      // localTime = moment(localTime).format("YYYYMMDDTHHmmss");
-      localTime = moment(localTime).format(
-        "YYYY년 MM월 DD일 HH시 mm분 ss초 (+09:00)"
-      );
+      localTime = moment(localTime).format("YYYYMMDDTHHmmss");
+      // localTime = moment(localTime).format(
+      //   "YYYY년 MM월 DD일 HH시 mm분 ss초 (+09:00)"
+      // );
       return localTime;
     },
-    setDept(dept) {
-      if (typeof dept === "object") {
-        dept = dept[this.language.locale];
+    setWord(word) {
+      if (word.includes(this.language.locale)) {
+        if (JSON.parse(word).ko.length > 0) {
+          word = JSON.parse(word)[this.language.locale];
+        }
       }
-      console.log('sssssssssss ', this.language.locale);
-      return dept;
+      return word;
     },
   },
 };

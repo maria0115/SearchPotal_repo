@@ -1,7 +1,7 @@
 <template>
   <div class="pageAside">
     <section class="asideSection">
-      <h2>연관 검색어</h2>
+      <h2>{{ language.associatedsearchterm }}</h2>
       <ol class="relatedList" v-if="rList.length > 0">
         <li v-for="(item, index) in this.rList" :key="index">
           <a href="#" class="keyword" @click="keywordSearch(item.key)">{{
@@ -14,13 +14,15 @@
       </ol>
     </section>
     <section class="asideSection">
-      <h2>인기검색어</h2>
-      <ul class="tabMenu">
+      <h2>{{ language.popularsearchterm }}</h2>
+      <ul class="tabMenu" style="border:0px">
+        <br>
         <li class="on">
-          <a @click="kListFilter('thisWeek')">이번주</a>
+          <a @click="kListFilter('thisWeek')">{{ language.thisweek }}</a>
         </li>
-        <li><a @click="kListFilter('thisMonth')">이번달</a></li>
+        <li><a @click="kListFilter('thisMonth')">{{ language.thismonth }}</a></li>
       </ul>
+      <br>
       <ol
         class="popularList tabContent"
         id="popularWeekList"

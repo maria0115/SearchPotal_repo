@@ -1,6 +1,6 @@
 <template>
   <header class="pageHeader">
-    <select @change="(e) => ChangeLanguage(e)">
+    <!-- <select @change="(e) => ChangeLanguage(e)">
       <option
         v-for="option in options"
         :key="option.value"
@@ -8,13 +8,13 @@
       >
         {{ option.text }}
       </option>
-    </select>
+    </select> -->
     <div class="searchArea">
       <div class="searchBox">
         <div class="keyword">
           <input
             type="text"
-            placeholder="검색어 입력"
+            :placeholder="language.inputsearch"
             @keyup.enter="btnSearch"
             v-model="searchname"
           />
@@ -40,7 +40,7 @@
             type="checkbox"
             @click="(e) => ResearchCheck(e)"
             class="hidden"
-          /><span class="txt">결과 내 재검색</span></label
+          /><span class="txt">{{ language.searchofresult }}</span></label
         >
       </div>
     </div>
@@ -61,11 +61,11 @@
             </router-link>
           </li>
           <span v-for="(item, index) in category" :key="index">
-          <li :class="{ on: CategoryOn(item) }" @click="CategoryBtn(item)">
-            <router-link :to="`/board/${item}`">
-              {{ language[item] }}
-            </router-link>
-          </li>
+            <li :class="{ on: CategoryOn(item) }" @click="CategoryBtn(item)">
+              <router-link :to="`/board/${item}`">
+                {{ language[item] }}
+              </router-link>
+            </li>
           </span>
           <!-- <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
             <router-link :to="`/all`">
@@ -280,11 +280,11 @@ export default {
       this.startDate = "";
       this.endDate = "";
     },
-    ChangeLanguage(e) {
-      console.log(e.target.value);
-      var value = e.target.value;
-      this.$store.dispatch("LanguageFetchData", value);
-    },
+    // ChangeLanguage(e) {
+    //   console.log(e.target.value);
+    //   var value = e.target.value;
+    //   this.$store.dispatch("LanguageFetchData", value);
+    // },
     ResearchCheck(e) {
       var checked = e.target.checked;
       this.$store.commit("ResearchCheck", checked);
@@ -328,8 +328,21 @@ export default {
     },
   },
   created() {
-    // this.$store.dispatch("LanguageFetchData", "");
-    this.$store.dispatch("LanguageFetchData", this.selected);
+    // cookie에서 language 값 받아오기
+    var locale = this.$cookies.get("language");
+
+    if (
+      typeof locale == "undefined" ||
+      typeof locale == undefined ||
+      locale == null ||
+      locale == ""
+    ) {
+      locale = "ko";
+    }
+
+    console.log("locale => " , locale);
+
+    this.$store.dispatch("LanguageFetchData", locale);
   },
 };
 </script>
