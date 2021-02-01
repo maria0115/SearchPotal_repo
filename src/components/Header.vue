@@ -353,7 +353,7 @@ export default {
       sessionId = "";
     }
 
-    sessionId += "DomAuthSessId=" + sessionId;
+    sessionId = "DomAuthSessId=" + sessionId;
 
     console.log("locale => ", locale);
 
