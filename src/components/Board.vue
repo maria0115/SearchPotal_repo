@@ -151,7 +151,7 @@ export default {
     },
     setWord(word) {
       if (word.includes(this.language.locale)) {
-        if (JSON.parse(word).ko.length > 0) {
+        if (JSON.parse(word)[this.language.locale].length > 0) {
           word = JSON.parse(word)[this.language.locale];
         }
       }

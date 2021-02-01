@@ -16,13 +16,13 @@
     <section class="asideSection">
       <h2>{{ language.popularsearchterm }}</h2>
       <ul class="tabMenu" style="border:0px">
-        <br>
+        <br v-if="language.locale == 'en'">
         <li class="on">
           <a @click="kListFilter('thisWeek')">{{ language.thisweek }}</a>
         </li>
         <li><a @click="kListFilter('thisMonth')">{{ language.thismonth }}</a></li>
       </ul>
-      <br>
+      <br v-if="language.locale == 'en'">
       <ol
         class="popularList tabContent"
         id="popularWeekList"

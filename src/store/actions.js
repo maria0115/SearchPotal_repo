@@ -82,7 +82,7 @@ export default {
                 commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });
 
-                dispatch("LanguageFetchData", state.languageoptionselected);
+                dispatch("LanguageFetchData", { locale: state.languageoptionselected, sessionId: state.sessionId });
                 state.tf = false;
             });
 
@@ -153,9 +153,10 @@ export default {
 
     },
     // 언어
-    LanguageFetchData({ commit, state }, localevalue) {
+    LanguageFetchData({ commit, state }, { locale, sessionId }) {
         var data = {};
-        data["locale"] = localevalue;
+        data["locale"] = locale;
+        data["sessionId"] = sessionId;
         // console.log(JSON.stringify(data));
         var sortdata = state.sortdata;
         var getdata = state.data;
@@ -167,7 +168,8 @@ export default {
         data.searchword = getdata.searchword;
         data.searchwordarr = state.data.searchwordarr;
 
-        state.languageoptionselected = localevalue;
+        state.languageoptionselected = locale;
+        state.sessionId = sessionId;
 
         return GetLanguage(data)
             .then(response => {

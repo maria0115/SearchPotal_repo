@@ -106,7 +106,11 @@
           <li class="on">
             <a @click="SortBtn('desc', 'aOrd')">{{ language.sortdate }}</a>
           </li>
-          <li><a @click="SortBtn('accuracy', 'aOrd')">정확도순</a></li>
+          <li>
+            <a @click="SortBtn('accuracy', 'aOrd')">{{
+              language.accuracyorder
+            }}</a>
+          </li>
         </ul>
       </div>
       <div class="filterItem">
@@ -164,7 +168,7 @@
                 />
               </div>
               <a class="btnSubmit" @click="SortBtn('custom', 'dateType')"
-                >적용</a
+                >{{ language.apply }}</a
               >
             </div>
           </li>
@@ -330,6 +334,7 @@ export default {
   created() {
     // cookie에서 language 값 받아오기
     var locale = this.$cookies.get("language");
+    var sessionId = this.$cookies.get("DomAuthSessId");
 
     if (
       typeof locale == "undefined" ||
@@ -339,10 +344,21 @@ export default {
     ) {
       locale = "ko";
     }
+    if (
+      typeof sessionId == "undefined" ||
+      typeof sessionId == undefined ||
+      sessionId == null ||
+      sessionId == ""
+    ) {
+      sessionId = "";
+    }
 
-    console.log("locale => " , locale);
+    console.log("locale => ", locale);
 
-    this.$store.dispatch("LanguageFetchData", locale);
+    this.$store.dispatch("LanguageFetchData", {
+      locale: locale,
+      sessionId: sessionId,
+    });
   },
 };
 </script>
