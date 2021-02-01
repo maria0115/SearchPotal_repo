@@ -353,6 +353,8 @@ export default {
       sessionId = "";
     }
 
+    sessionId += "DomAuthSessId=" + sessionId;
+
     console.log("locale => ", locale);
 
     this.$store.dispatch("LanguageFetchData", {
