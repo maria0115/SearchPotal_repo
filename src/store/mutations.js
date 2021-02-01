@@ -141,6 +141,7 @@ export default {
         // 지금 이 순간
         var moment = require("moment");
         state.data.created = moment().utc().format("YYYYMMDDTHHmmss");
+        state.current = moment().format("YYYYMMDDTHHmmss");
 
         // // 받아온 created에 +09:00
         // var moment = require("moment");

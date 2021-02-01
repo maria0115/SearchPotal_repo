@@ -9,6 +9,7 @@ export const store = new VueX.Store({
     state: {
         tf: false,
         sessionId: "",
+        current: "",
         rList: {}, // 관련검색어
         kList: {}, // 인기검색어
         term: "thisWeek", // 인기검색어 필터
