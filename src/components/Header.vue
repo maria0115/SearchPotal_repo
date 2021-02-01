@@ -334,7 +334,7 @@ export default {
   created() {
     // cookie에서 language 값 받아오기
     var locale = this.$cookies.get("language");
-    var sessionId = this.$cookies.get("DomAuthSessId");
+    var sessionId = this.$cookies.get("SessionID");
 
     if (
       typeof locale == "undefined" ||
@@ -353,7 +353,7 @@ export default {
       sessionId = "";
     }
 
-    sessionId = "DomAuthSessId=" + sessionId;
+    sessionId = "SessionID=" + sessionId;
 
     console.log("locale => ", locale);
 

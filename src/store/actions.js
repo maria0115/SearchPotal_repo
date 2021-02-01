@@ -18,6 +18,7 @@ export default {
         commit('setTime');
         data.term = state.term;
         data.current = state.current;
+        data.sessionId = state.sessionId;
 
         console.log('헤더 클릭 ', data);
 
@@ -74,6 +75,7 @@ export default {
 
         commit('setTime');
         data.current = state.current;
+        data.sessionId = state.sessionId;
 
         console.log('검색 버튼 클릭 ', data);
 
@@ -92,7 +94,7 @@ export default {
     // 인기검색어 필터
     KSearch({ state, commit }, { term }) {
         commit('setTime');
-        return WeekMonth({ term: term, created: state.data.created, current: state.current })
+        return WeekMonth({ term: term, created: state.data.created, current: state.current, sessionId: state.sessionId })
             .then(response => {
                 commit('popularList', { popular: response.data, term: term });
             });
@@ -122,6 +124,7 @@ export default {
         commit('setTime');
         data.current = state.current;
         data.term = state.term;
+        data.sessionId = state.sessionId;
 
         console.log('필터 클릭 ', data);
 
@@ -145,6 +148,7 @@ export default {
         commit('setTime');
         data.current = state.current;
         data.term = state.term;
+        data.sessionId = state.sessionId;
 
         console.log('페이지 번호 클릭 ', data);
 
