@@ -8,17 +8,14 @@
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in personData.data" :key="index">
               <!-- <router-link :to="`/detail/${index} person`"> -->
-              <a
-                :href="url + data.originalurl"
-                target="blank"
-              >
+              <a :href="url + data.originalurl" target="blank">
                 <div class="profile">
                   <div class="thumb">
-                    <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
+                    <img :src="url + data.photo" alt="" />
                   </div>
                   <div class="name kor">{{ data.subject }}</div>
                 </div>
-                <div class="dept">{{ setDept(data.dept) }}</div>
+                <div class="dept">{{ setWord(data.dept) }}</div>
                 <div class="pos">
                   <span>직급: {{ data.jobTitle }}</span>
                   <span>직책: {{ data.jobPosition }}</span>
@@ -41,7 +38,7 @@
         </ul>
         <div class="pagination">
           <!-- {{ sortdata.total_cnt }}
-          {{ nowpage }} -->
+{{ nowpage }} -->
           <ul>
             <span v-if="!(this.nowpage == 1)">
               <li>
@@ -119,7 +116,6 @@ export default {
       remainder: (state) => state.remainder,
       language: (state) => state.language,
       category: (state) => state.data.class,
-      languageoptionselected: (state) => state.languageoptionselected,
     }),
     url() {
       return config.url;
@@ -130,11 +126,14 @@ export default {
     BoardButton,
   },
   methods: {
-    setDept(dept) {
-      if (typeof dept === "object") {
-        dept = dept[this.language.locale];
+    setWord(word) {
+      if (word.includes(this.language.locale)) {
+        if (JSON.parse(word)[this.language.locale].length > 0) {
+          word = JSON.parse(word)[this.language.locale];
+        }
       }
-      return dept;
+
+      return word;
     },
   },
 };

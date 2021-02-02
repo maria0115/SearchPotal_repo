@@ -4,7 +4,7 @@
       <section class="resultSection">
         <h2 class="title">
           {{ language.person }}
-          <!-- <span class="cnt">92</span> -->
+          <span class="cnt">{{this.personData.total_cnt}}</span>
         </h2>
         <ul class="employeeList">
           <span v-if="this.personData">
@@ -13,7 +13,7 @@
               <!-- <router-link :to="`/detail/${index} person`"> -->
               <a :href="url + data.originalurl" target="blank">
                 <span class="thumb"
-                  ><img src="../portal/images/_emp_thumb_x76_01.png" alt=""
+                  ><img :src="url+data.photo" alt=""
                 /></span>
                 <span class="name kor">{{ data.subject }}</span>
                 <span class="team">{{ setWord(data.dept) }}</span>
@@ -100,7 +100,6 @@ export default {
       approData: (state) => state.approData,
       boardData: (state) => state.boardData,
       personData: (state) => state.personData,
-      languageoptionselected: (state) => state.languageoptionselected,
     }),
     category() {
       return config.category;
@@ -118,9 +117,6 @@ export default {
       var moment = require("moment");
       var localTime = moment.utc(date).toDate();
       localTime = moment(localTime).format("YYYYMMDDTHHmmss");
-      // localTime = moment(localTime).format(
-      //   "YYYY년 MM월 DD일 HH시 mm분 ss초 (+09:00)"
-      // );
       return localTime;
     },
     setWord(word) {

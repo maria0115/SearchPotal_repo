@@ -11,25 +11,25 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/search': {
-        target: 'http://localhost:4000/search',
+      '/search/': {
+        target: 'http://localhost:4000/search/',
         changeOrigin: true,
         pathRewrite: {
-          '^/search': ''
+          '^/search/': ''
         }
       },
-      '/getlangueges': {
-        target: 'http://localhost:4000/getlangueges',
+      '/getlanguages/': {
+        target: 'http://localhost:4000/getlanguages/',
         changeOrigin: true,
         pathRewrite: {
-          '^/getlangueges': ''
+          '^/getlanguages/': ''
         }
       },
-      '/popular': {
-        target: 'http://localhost:4000/popular',
+      '/popular/': {
+        target: 'http://localhost:4000/popular/',
         changeOrigin: true,
         pathRewrite: {
-          '^/popular': ''
+          '^/popular/': ''
         }
       },
       // '/create': {

@@ -3,7 +3,7 @@ import axios from 'axios';
 function GetLanguage(data) {
     return axios({
         method: 'post',
-        url: `/getlangueges`,
+        url: `/getlanguages/`,
         data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -13,7 +13,7 @@ function GetLanguage(data) {
 function Search(data) {
     return axios({
         method: 'post',
-        url: `/search`,
+        url: `/search/`,
         data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ function Search(data) {
 function WeekMonth(data) {
     return axios({
         method: 'post',
-        url: `/popular`,
+        url: `/popular/`,
         data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
