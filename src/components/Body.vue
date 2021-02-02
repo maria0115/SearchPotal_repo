@@ -4,7 +4,9 @@
       <section class="resultSection">
         <h2 class="title">
           {{ language.person }}
+
           <span class="cnt">{{this.personData.total_cnt}}</span>
+
         </h2>
         <ul class="employeeList">
           <span v-if="this.personData">
