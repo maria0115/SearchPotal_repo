@@ -4,7 +4,6 @@ export default {
     // 헤더에 있는 메뉴 클릭시 카테고리 변경
     BigCategory({ state, commit }, category) {
         state.tf = true;
-        console.log('bigcategory', category);
         var data = state.data;
         data.pagenum = config.defaultPageNum - 1;
         // 전체 검색일 때 size
@@ -20,8 +19,6 @@ export default {
         data.current = state.current;
         data.sessionId = state.sessionId;
 
-        console.log('헤더 클릭 ', data);
-
         return Search(data)
             .then(response => {
                 commit('BigCategory', { res: response.data, category: category });
@@ -30,8 +27,6 @@ export default {
                     res: response.data.data, word: state.data.searchword, page: state.data.pagenum,
                     replaceword: state.data.searchword, what: state.data.what, whatfield: state.data.whatfield
                 });
-
-                console.log('헤더 클릭 결과 ', response);
 
                 state.tf = false;
             });
@@ -77,11 +72,8 @@ export default {
         data.current = state.current;
         data.sessionId = state.sessionId;
 
-        console.log('검색 버튼 클릭 ', data);
-
         return Search(data)
             .then(response => {
-                console.log('검색 버튼 클릭 결과 ', response);
 
                 commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });
@@ -126,13 +118,9 @@ export default {
         data.term = state.term;
         data.sessionId = state.sessionId;
 
-        console.log('필터 클릭 ', data);
-
         return Search(data)
             .then(response => {
                 commit('SearchData', { what: what, whatfield: whatfield, res: response.data.data, replaceword: data.searchword });
-
-                console.log('필터 클릭 결과 ', response);
             });
 
     },
@@ -150,11 +138,8 @@ export default {
         data.term = state.term;
         data.sessionId = state.sessionId;
 
-        console.log('페이지 번호 클릭 ', data);
-
         return Search(data)
             .then(response => {
-                console.log('페이지 번호 클릭 결과 ', response);
                 commit('SearchData', { res: response.data.data, page: page, size: size, replaceword: data.searchword });
                 state.tf = false;
             });
@@ -165,7 +150,6 @@ export default {
         var data = {};
         // data["locale"] = locale;
         // data["sessionId"] = sessionId;
-        // // console.log(JSON.stringify(data));
         var sortdata = state.sortdata;
         var getdata = state.data;
         data['total_cnt'] = 0;
@@ -184,7 +168,6 @@ export default {
 
         return GetLanguage(data)
             .then(response => {
-                console.log('언어 결과 ', response.data);
                 commit('LanguageData', { data: response.data });
             });
     },

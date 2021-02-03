@@ -167,9 +167,9 @@
                   placeholder="MM/DD/YYYY"
                 />
               </div>
-              <a class="btnSubmit" @click="SortBtn('custom', 'dateType')"
-                >{{ language.apply }}</a
-              >
+              <a class="btnSubmit" @click="SortBtn('custom', 'dateType')">{{
+                language.apply
+              }}</a>
             </div>
           </li>
         </ul>
@@ -333,34 +333,9 @@ export default {
   },
   created() {
     // cookie에서 language 값 받아오기
-    var locale = this.$cookies.get("language");
-    var sessionId = this.$cookies.get("SessionID");
+    // var locale = this.$cookies.get("language");
 
-    if (
-      typeof locale == "undefined" ||
-      typeof locale == undefined ||
-      locale == null ||
-      locale == ""
-    ) {
-      locale = "ko";
-    }
-    if (
-      typeof sessionId == "undefined" ||
-      typeof sessionId == undefined ||
-      sessionId == null ||
-      sessionId == ""
-    ) {
-      sessionId = "";
-    }
-
-    sessionId = "SessionID=" + sessionId;
-
-    console.log("locale => ", locale);
-
-    this.$store.dispatch("LanguageFetchData", {
-      locale: locale,
-      sessionId: sessionId,
-    });
+    this.$store.dispatch("LanguageFetchData");
   },
 };
 </script>

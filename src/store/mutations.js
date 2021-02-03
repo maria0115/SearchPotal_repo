@@ -33,7 +33,6 @@ export default {
         // }
     },
     SearchData(state, { res, word, replaceword, what, whatfield, page, size }) {
-        console.log('전체 결과  ', res);
 
         var result = {};
 
