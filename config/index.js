@@ -18,11 +18,11 @@ module.exports = {
           '^/search': ''
         }
       },
-      '/getlangueges': {
-        target: 'http://localhost:4000/getlangueges',
+      '/getlanguages': {
+        target: 'http://localhost:4000/getlanguages',
         changeOrigin: true,
         pathRewrite: {
-          '^/getlangueges': ''
+          '^/getlanguages': ''
         }
       },
       '/popular': {

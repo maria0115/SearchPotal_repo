@@ -59,7 +59,6 @@ export default {
     if (this.arr.length > 1) {
       this.index = this.arr[0];
     }
-
     // var moment = require("moment");
     //     for (var i = 0; i < this.sortdata.length; i++) {
     //         this.sortdata[i].created = moment(this.sortdata[i].created).add(9, "h").format("YYYYMMDDTHHmmssZ");

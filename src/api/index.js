@@ -3,7 +3,7 @@ import axios from 'axios';
 function GetLanguage(data) {
     return axios({
         method: 'post',
-        url: `/getlangueges`,
+        url: `/getlanguages`,
         data: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'

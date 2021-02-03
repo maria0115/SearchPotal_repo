@@ -4,9 +4,9 @@
       <section class="resultSection">
         <h2 class="title">
           {{ language.person }}
-          <span class="cnt">{{
-            this.personData.total_cnt ? this.personData.total_cnt : 0
-          }}</span>
+          <span class="cnt">
+            {{ setNum(this.personData) }}
+          </span>
         </h2>
         <ul class="employeeList">
           <span v-if="this.personData">
@@ -15,8 +15,8 @@
               <!-- <router-link :to="`/detail/${index} person`"> -->
               <a :href="url + data.originalurl" target="blank">
                 <span class="thumb"
-                  ><img src="../portal/images/_emp_thumb_x76_01.png" alt=""
-                /></span>
+                  ><img :src="url + data.photo" alt="" />
+                </span>
                 <span class="name kor">{{ data.subject }}</span>
                 <span class="team">{{ setWord(data.dept) }}</span>
               </a>
@@ -132,6 +132,9 @@ export default {
         }
       }
       return word;
+    },
+    setNum(list) {
+      return 0;
     },
   },
 };

@@ -14,11 +14,11 @@
               >
                 <div class="profile">
                   <div class="thumb">
-                    <img src="../portal/images/_emp_thumb_x76_01.png" alt="" />
+                    <img :src="url + data.photo" alt="" />
                   </div>
                   <div class="name kor">{{ data.subject }}</div>
                 </div>
-                <div class="dept">{{ setDept(data.dept) }}</div>
+                <div class="dept">{{ setWord(data.dept) }}</div>
                 <div class="pos">
                   <span>직급: {{ data.jobTitle }}</span>
                   <span>직책: {{ data.jobPosition }}</span>
@@ -130,11 +130,14 @@ export default {
     BoardButton,
   },
   methods: {
-    setDept(dept) {
-      if (typeof dept === "object") {
-        dept = dept[this.language.locale];
+    setWord(word) {
+      if (word.includes(this.language.locale)) {
+        if (JSON.parse(word)[this.language.locale].length > 0) {
+          word = JSON.parse(word)[this.language.locale];
+        }
       }
-      return dept;
+
+      return word;
     },
   },
 };
