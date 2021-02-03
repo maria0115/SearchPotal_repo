@@ -8,10 +8,7 @@
             <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
             <li v-for="(data, index) in personData.data" :key="index">
               <!-- <router-link :to="`/detail/${index} person`"> -->
-              <a
-                :href="url + data.originalurl"
-                target="blank"
-              >
+              <a :href="url + data.originalurl" target="blank">
                 <div class="profile">
                   <div class="thumb">
                     <img :src="url + data.photo" alt="" />
@@ -41,7 +38,7 @@
         </ul>
         <div class="pagination">
           <!-- {{ sortdata.total_cnt }}
-          {{ nowpage }} -->
+{{ nowpage }} -->
           <ul>
             <span v-if="!(this.nowpage == 1)">
               <li>
@@ -119,7 +116,6 @@ export default {
       remainder: (state) => state.remainder,
       language: (state) => state.language,
       category: (state) => state.data.class,
-      languageoptionselected: (state) => state.languageoptionselected,
     }),
     url() {
       return config.url;

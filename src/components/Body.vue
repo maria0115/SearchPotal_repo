@@ -102,7 +102,6 @@ export default {
       approData: (state) => state.approData,
       boardData: (state) => state.boardData,
       personData: (state) => state.personData,
-      languageoptionselected: (state) => state.languageoptionselected,
     }),
     category() {
       return config.category;
@@ -120,9 +119,6 @@ export default {
       var moment = require("moment");
       var localTime = moment.utc(date).toDate();
       localTime = moment(localTime).format("YYYYMMDDTHHmmss");
-      // localTime = moment(localTime).format(
-      //   "YYYY년 MM월 DD일 HH시 mm분 ss초 (+09:00)"
-      // );
       return localTime;
     },
     setWord(word) {
