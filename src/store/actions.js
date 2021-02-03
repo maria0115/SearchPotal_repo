@@ -86,7 +86,7 @@ export default {
                 commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });
 
-                dispatch("LanguageFetchData", { locale: state.languageoptionselected, sessionId: state.sessionId });
+                dispatch("LanguageFetchData");
                 state.tf = false;
             });
 
@@ -161,11 +161,11 @@ export default {
 
     },
     // 언어
-    LanguageFetchData({ commit, state }, { locale, sessionId }) {
+    LanguageFetchData({ commit, state }) {
         var data = {};
-        data["locale"] = locale;
-        data["sessionId"] = sessionId;
-        // console.log(JSON.stringify(data));
+        // data["locale"] = locale;
+        // data["sessionId"] = sessionId;
+        // // console.log(JSON.stringify(data));
         var sortdata = state.sortdata;
         var getdata = state.data;
         data['total_cnt'] = 0;
@@ -176,8 +176,8 @@ export default {
         data.searchword = getdata.searchword;
         data.searchwordarr = state.data.searchwordarr;
 
-        state.languageoptionselected = locale;
-        state.sessionId = sessionId;
+        // state.languageoptionselected = locale;
+        // state.sessionId = sessionId;
 
         commit('setTime');
         data.current = state.current;
@@ -187,6 +187,5 @@ export default {
                 console.log('언어 결과 ', response.data);
                 commit('LanguageData', { data: response.data });
             });
-    }
-
+    },
 }

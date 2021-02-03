@@ -11,11 +11,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/search/': {
-        target: 'http://localhost:4000/search/',
+      '/search': {
+        target: 'http://localhost:4000/search',
         changeOrigin: true,
         pathRewrite: {
-          '^/search/': ''
+          '^/search': ''
         }
       },
       '/getlanguages': {
@@ -25,11 +25,11 @@ module.exports = {
           '^/getlanguages': ''
         }
       },
-      '/popular/': {
-        target: 'http://localhost:4000/popular/',
+      '/popular': {
+        target: 'http://localhost:4000/popular',
         changeOrigin: true,
         pathRewrite: {
-          '^/popular/': ''
+          '^/popular': ''
         }
       },
       // '/create': {
