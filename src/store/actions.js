@@ -74,6 +74,7 @@ export default {
 
         return Search(data)
             .then(response => {
+                console.log('검색 결과 : ', response);
 
                 commit('SearchData', { res: response.data.data, word: word, page: pagenum, replaceword: data.searchword });
                 commit('setList', { popular: response.data.popular, relation: response.data.relation });

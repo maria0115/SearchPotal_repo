@@ -60,6 +60,14 @@
               {{ language.person }}
             </router-link>
           </li>
+          <li
+            :class="{ on: CategoryOn('mail') }"
+            @click="CategoryBtn('mail')"
+          >
+            <router-link :to="`/mail`">
+              {{ language.mail }}
+            </router-link>
+          </li>
           <span v-for="(item, index) in category" :key="index">
             <li :class="{ on: CategoryOn(item) }" @click="CategoryBtn(item)">
               <router-link :to="`/board/${item}`">
