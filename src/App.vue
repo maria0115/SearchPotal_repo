@@ -36,6 +36,10 @@ export default {
     Person,
     Spinner,
   },
+  created() {
+    // var locale = this.$cookies.get("language");
+    this.$store.dispatch("LanguageFetchData");
+  },
 };
 </script>
 

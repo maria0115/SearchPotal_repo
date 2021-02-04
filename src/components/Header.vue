@@ -84,7 +84,6 @@
             </li>
           </span>
 
-
           <!-- <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
             <router-link :to="`/all`">
               {{ language.allsearch }}
@@ -352,10 +351,21 @@ export default {
     },
   },
   created() {
-    // cookie에서 language 값 받아오기
-    // var locale = this.$cookies.get("language");
+    var text = this.$route.query.text;
 
-    this.$store.dispatch("LanguageFetchData");
+    // 쿼리스트링 넘기기
+    //  <router-link :to="{path:'ematesearch/person', query:{text:'다시'}}">
+
+    if (
+      typeof text == "undefined" ||
+      typeof text == undefined ||
+      text == null ||
+      text == ""
+    ) {
+      return;
+    }
+    text = text.trim();
+    this.$store.dispatch("SearchWord", { word: text });
   },
 };
 </script>
