@@ -1,7 +1,10 @@
 {
   "category": {
+    "allsearch": "allsearch",
+    "person": "person",
     "approval": "approval",
-    "board": "board"
+    "board": "board",
+    "mail": "mail"
   },
   "url": "http://kms.saerom.co.kr",
   "defaultSize": 10,

@@ -6,36 +6,24 @@
       v-for="index in vforcnt"
       :key="index"
     >
-      <span v-if="category === 'person'">
+      <!-- <span v-if="category === 'person'">
         <router-link
-          :to="`/person/${category}/page?page=${
+          :to="`/ematesearch/${category}/page?page=${
             index + (nowpage - 1) * perpagecnt
           }`"
           class="link"
         >
           <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
         </router-link>
-      </span>
-      <span v-if="category === 'approval'">
-        <router-link
-          :to="`/board/${category}/page?page=${
-            index + (nowpage - 1) * perpagecnt
-          }`"
-          class="link"
-        >
-          <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
-        </router-link>
-      </span>
-      <span v-if="category === 'board'">
-        <router-link
-          :to="`/board/${category}/page?page=${
-            index + (nowpage - 1) * perpagecnt
-          }`"
-          class="link"
-        >
-          <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
-        </router-link>
-      </span>
+      </span> -->
+      <router-link
+        :to="`/ematesearch/${category}/page?page=${
+          index + (nowpage - 1) * perpagecnt
+        }`"
+        class="link"
+      >
+        <span>{{ index + (nowpage - 1) * perpagecnt }}</span>
+      </router-link>
     </li>
     <!-- ### 활성화 메뉴 클래스 "on" 추가 ### -->
   </span>

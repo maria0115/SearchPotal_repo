@@ -7,7 +7,7 @@ export default {
         var data = state.data;
         data.pagenum = config.defaultPageNum - 1;
         // 전체 검색일 때 size
-        if (category == "all") {
+        if (category == "allsearch") {
             data.size = config.defaultHomeSize;
         } else {
             data.size = config.defaultSize;
@@ -63,7 +63,7 @@ export default {
         data.pagenum = pagenum;
         data.term = state.term;
 
-        if (data.class === "all") {
+        if (data.class === "allsearch") {
             data.size = config.defaultHomeSize;
             state.data.size = data.size;
         }
@@ -98,7 +98,7 @@ export default {
 
         data.pagenum = 0;
 
-        if (data.class == "all") {
+        if (data.class == "allsearch") {
             data.size = config.defaultHomeSize;
         } else {
             data.size = config.defaultSize;
@@ -171,5 +171,60 @@ export default {
             .then(response => {
                 commit('LanguageData', { data: response.data });
             });
+    },
+    pageSetting({ state, commit, dispatch }, { routeTo }) {
+        var query = routeTo.query;
+        var nowpage = state.nowpage;
+        var totalperpagecnt = state.totalperpagecnt;
+        var totalpage = state.totalpage;
+        var remainder = state.remainder;
+        var perpage = state.perpage;
+
+        var page = 0;
+
+        if (query.name) {
+            var nowpagechange = 1;
+
+            console.log(page, "page와이라노,,");
+            if (query.name == 'prev' && nowpage > 1) {
+                page = (nowpage - 2) * state.perpagecnt + config.defaultPageNum;
+                nowpagechange = nowpage - 1;
+            }
+            else if (query.name == 'next' && totalperpagecnt >= nowpage) {
+                if (remainder === 0 && nowpage === totalperpagecnt && perpage === 0) {
+                    nowpagechange = totalperpagecnt;
+                    page = totalpage;
+                } else {
+                    nowpagechange = nowpage + 1;
+                    page = nowpage * state.perpagecnt + config.defaultPageNum;
+
+                }
+
+            }
+            else if (query.name == 'last') {
+                if (remainder > 0) {
+                    nowpagechange = totalperpagecnt + 1;
+                    page = totalpage + 1;
+                } else {
+                    nowpagechange = totalperpagecnt + 1;
+                    page = totalpage;
+                }
+            }
+            else if (query.name == 'first') {
+                nowpagechange = 1;
+                page = 1;
+            }
+            commit("NowPageChange", nowpagechange);
+        }
+        else if (query.page && query.page > 0) {
+            page = query.page;
+        }
+        var size = config.defaultSize;
+        if (!(totalpage == 0) && page == totalpage + 1 && state.data.class) {
+            size = remainder;
+        }
+        page--;
+
+        dispatch("PageSearch", { page: page, size: size });
     },
 }

@@ -5,58 +5,50 @@
       <section class="resultSection">
         <h2 class="boardTitle">{{ language[category] }}</h2>
         <ul class="boardList">
-          <!-- <router-view></router-view> -->
-          <span v-if="category === 'approval'">
-            <span v-if="approData">
-              <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
-              <li v-for="(data, index) in approData.data" :key="index">
-                <!-- <router-link :to="`/detail/${index} approval`"> -->
-                <a :href="url + data.originalurl" target="blank">
-                  <span class="location">{{ data.nav }}</span>
-                  <span class="subject">{{ data.subject }}</span>
-                  <span class="write"
-                    >{{ setWord(data.author) }} / {{ setWord(data.dept) }}
-                    <span class="date">{{ getTime(data.created) }}</span></span
-                  >
-                  <span class="content">{{ data.body }}</span>
-                  <span class="attch"
-                    ><span class="hidden">첨부파일</span></span
-                  >
-                </a>
-                <!-- </router-link> -->
-              </li>
-            </span>
+          <span v-if="sortdata[category]">
+            <li v-for="(data, index) in sortdata[category].data" :key="index">
+              <a :href="url + data.originalurl" target="blank">
+                <span class="location">{{ data.nav }}</span>
+                <span class="subject">{{ data.subject }}</span>
+                <span class="write"
+                  >{{ setWord(data.author) }} / {{ setWord(data.dept) }}
+                  <span class="date">{{ getTime(data.created) }}</span></span
+                >
+                <span class="content">{{ data.body }}</span>
+                <span class="attch"><span class="hidden">첨부파일</span></span>
+              </a>
+            </li>
           </span>
-          <span v-else-if="category === 'board'">
+
+          <!-- <span v-else-if="category === 'board'">
             <span v-if="boardData">
-              <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
               <li v-for="(data, index) in boardData.data" :key="index">
-                <!-- <router-link :to="`/detail/${index} board`"> -->
-                <a :href="url + data.originalurl" target="blank">
-                  <span class="location">{{ data.from }}</span>
-                  <span class="subject">{{ data.subject }}</span>
-                  <span class="write"
-                    >{{ setWord(data.author) }} / {{ setWord(data.dept) }}
-                    <span class="date">{{ getTime(data.created) }}</span></span
-                  >
-                  <span class="content">{{ data.body }}</span>
-                  <span class="attch"
-                    ><span class="hidden">첨부파일</span></span
-                  >
-                </a>
-                <!-- </router-link> -->
+                <router-link :to="`/detail/${index} board`">
+                  <a :href="url + data.originalurl" target="blank">
+                    <span class="location">{{ data.from }}</span>
+                    <span class="subject">{{ data.subject }}</span>
+                    <span class="write"
+                      >{{ setWord(data.author) }} / {{ setWord(data.dept) }}
+                      <span class="date">{{
+                        getTime(data.created)
+                      }}</span></span
+                    >
+                    <span class="content">{{ data.body }}</span>
+                    <span class="attch"
+                      ><span class="hidden">첨부파일</span></span
+                    >
+                  </a>
+                </router-link>
               </li>
             </span>
-          </span>
+          </span> -->
         </ul>
         <div class="pagination">
-          <!-- {{ sortdata.total_cnt }}
-          {{ nowpage }} -->
           <ul>
             <span v-if="!(this.nowpage == 1)">
               <li>
                 <router-link
-                  :to="`/board/${category}/page?name=${'first'}`"
+                  :to="`/ematesearch/${category}/page?name=${'first'}`"
                   class="btn btnPrev"
                 >
                   처음
@@ -64,7 +56,7 @@
               </li>
               <li>
                 <router-link
-                  :to="`/board/${category}/page?name=${'prev'}`"
+                  :to="`/ematesearch/${category}/page?name=${'prev'}`"
                   class="btn btnPrev"
                   >이전
                 </router-link>
@@ -91,14 +83,14 @@
             >
               <li>
                 <router-link
-                  :to="`/board/${category}/page?name=${'next'}`"
+                  :to="`/ematesearch/${category}/page?name=${'next'}`"
                   class="btn btnNext"
                   >다음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/board/${category}/page?name=${'last'}`"
+                  :to="`/ematesearch/${category}/page?name=${'last'}`"
                   class="btn btnPrev"
                   >마지막
                 </router-link>

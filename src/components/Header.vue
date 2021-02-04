@@ -16,7 +16,7 @@
             type="text"
             :placeholder="language.inputsearch"
             @keyup.enter="btnSearch"
-            v-model="searchname"
+            v-model="data.searchword"
           />
         </div>
         <button type="submit" class="btnSearch" @click="btnSearch"></button>
@@ -47,7 +47,7 @@
     <div class="lnb">
       <div class="lnbMenu">
         <ul>
-          <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
+          <!-- <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
             <router-link :to="`/all`">
               {{ language.allsearch }}
             </router-link>
@@ -74,7 +74,17 @@
                 {{ language[item] }}
               </router-link>
             </li>
+          </span> -->
+
+          <span v-for="(item, index) in category" :key="index">
+            <li :class="{ on: CategoryOn(item) }" @click="CategoryBtn(item)">
+              <router-link :to="`/ematesearch/${item}`">
+                {{ language[item] }}
+              </router-link>
+            </li>
           </span>
+
+
           <!-- <li :class="{ on: CategoryOn('all') }" @click="CategoryBtn('all')">
             <router-link :to="`/all`">
               {{ language.allsearch }}
@@ -232,8 +242,9 @@ export default {
       else false;
     },
     btnSearch() {
-      this.searchname = this.searchname.trim();
-      this.$store.dispatch("SearchWord", { word: this.searchname });
+      var word = this.data.searchword;
+      word = word.trim();
+      this.$store.dispatch("SearchWord", { word: word });
     },
     CategoryBtn(category) {
       this.$store.dispatch("BigCategory", category);
@@ -334,6 +345,7 @@ export default {
       language: (state) => state.language,
       options: (state) => state.languageoption,
       sortdata: (state) => state.sortdata,
+      data: (state) => state.data,
     }),
     category() {
       return config.category;

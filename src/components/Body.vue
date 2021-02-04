@@ -3,10 +3,12 @@
     <div class="pageContent">
       <section class="resultSection">
         <h2 class="title">
-          {{ language.person }}
-          <span class="cnt">
-            {{ setNum(this.personData) }}
-          </span>
+          <router-link :to="`/ematesearch/person`">
+            <span @click="setClass('person')"> {{ language.person }} </span>
+            <span class="cnt">
+              {{ setNum(this.personData) }}
+            </span>
+          </router-link>
         </h2>
         <ul class="employeeList">
           <span v-if="this.personData">
@@ -25,61 +27,53 @@
           </span>
         </ul>
         <span @click="setClass('person')">
-          <router-link :to="`/person/person`" class="btnMore">
+          <router-link :to="`/ematesearch/person`" class="btnMore">
             MORE
           </router-link>
         </span>
       </section>
-      <section class="resultSection" v-if="category.approval">
-        <h2 class="boardTitle">{{ language.approval }}</h2>
-        <ul class="boardList">
-          <span v-if="this.approData">
-            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
-            <li v-for="(data, index) in approData.data" :key="index">
-              <!-- <router-link :to="`/detail/${index} approval`"> -->
-              <a :href="url + data.originalurl" target="blank">
-                <span class="location">{{ setWord(data.dept) }}</span>
-                <span class="subject">{{ data.subject }}</span>
-                <span class="write"
-                  >{{ setWord(data.author) }}
-                  <span class="date">{{ getTime(data.created) }}</span></span
-                >
-                <span class="content">{{ data.body }}</span>
-                <span class="attch"><span class="hidden">첨부파일</span></span>
-              </a>
-              <!-- </router-link> -->
-            </li>
+
+      <span>
+        <section
+          class="resultSection"
+          v-for="(cate, index) in category"
+          :key="index"
+        >
+          <span v-if="cate !== 'person' && cate !== 'allsearch'">
+            <h2 class="boardTitle">
+              <router-link :to="`/ematesearch/${cate}`">
+                <span @click="setClass(cate)"> {{ language[cate] }} </span>
+              </router-link>
+            </h2>
+            <ul class="boardList">
+              <span v-if="sortdata[cate]">
+                <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
+                <li v-for="(data, index) in sortdata[cate].data" :key="index">
+                  <!-- <router-link :to="`/detail/${index} approval`"> -->
+                  <a :href="url + data.originalurl" target="blank">
+                    <span class="location">{{ setWord(data.dept) }}</span>
+                    <span class="subject">{{ data.subject }}</span>
+                    <span class="write"
+                      >{{ setWord(data.author) }}
+                      <span class="date">{{
+                        getTime(data.created)
+                      }}</span></span
+                    >
+                    <span class="content">{{ data.body }}</span>
+                    <span class="attch"
+                      ><span class="hidden">첨부파일</span></span
+                    >
+                  </a>
+                  <!-- </router-link> -->
+                </li>
+              </span>
+            </ul>
           </span>
-        </ul>
-        <router-link :to="`/board/approval`" class="btnMore">
-          <span @click="setClass('approval')"> MORE </span>
-        </router-link>
-      </section>
-      <section class="resultSection" v-if="category.board">
-        <h2 class="boardTitle">{{ language.board }}</h2>
-        <ul class="boardList">
-          <span v-if="this.boardData">
-            <!-- <span v-if="Array.isArray(this.sortdata.category.approval) && this.sortdata.category.approval.length>0"> -->
-            <li v-for="(data, index) in boardData.data" :key="index">
-              <!-- <router-link :to="`/detail/${index} board`"> -->
-              <a :href="url + data.originalurl" target="blank">
-                <span class="location">{{ setWord(data.dept) }}</span>
-                <span class="subject">{{ data.subject }}</span>
-                <span class="write"
-                  >{{ setWord(data.author) }}
-                  <span class="date">{{ getTime(data.created) }}</span></span
-                >
-                <span class="content">{{ data.body }}</span>
-                <span class="attch"><span class="hidden">첨부파일</span></span>
-              </a>
-              <!-- </router-link> -->
-            </li>
-          </span>
-        </ul>
-        <router-link :to="`/board/board`" class="btnMore">
-          <span @click="setClass('board')"> MORE </span>
-        </router-link>
-      </section>
+          <router-link :to="`/ematesearch/${cate}`" class="btnMore">
+            <span @click="setClass(cate)"> MORE </span>
+          </router-link>
+        </section>
+      </span>
     </div>
 
     <PageSide></PageSide>

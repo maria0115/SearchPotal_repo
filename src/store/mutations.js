@@ -74,6 +74,7 @@ export default {
         state.approData = state.sortdata.approval;
         state.boardData = state.sortdata.board;
         state.personData = state.sortdata.person;
+        state.mailData = state.sortdata.mail;
 
         // 전체 결과 건수
         state.sortdata.total_cnt = 0;
@@ -85,6 +86,9 @@ export default {
         }
         if (state.personData) {
             state.sortdata.total_cnt += state.personData.total_cnt;
+        }
+        if (state.mailData) {
+            state.sortdata.total_cnt += state.mailData.total_cnt;
         }
 
         // 새로운 데이터 별 바뀐 language
@@ -122,6 +126,7 @@ export default {
         state.approData = state.sortdata.approval;
         state.boardData = state.sortdata.board;
         state.personData = state.sortdata.person;
+        state.mailData = state.sortdata.mailData;
     },
     // 다국어
     LanguageData(state, { data }) {

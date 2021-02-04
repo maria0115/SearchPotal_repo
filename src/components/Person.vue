@@ -17,15 +17,13 @@
                 </div>
                 <div class="dept">{{ setWord(data.dept) }}</div>
                 <div class="pos">
-                  <span>직급: {{ data.jobTitle }}</span>
-                  <span>직책: {{ data.jobPosition }}</span>
+                  <span>직책: {{ data.jobposition }}</span>
                 </div>
                 <div class="contact">
-                  <span>회사: {{ data.company }}</span>
+                  <span>회사: {{ data.companytel }}</span>
                   <span>휴대폰: {{ data.phone }}</span>
                 </div>
                 <div class="contact">
-                  <span>자택: {{ data.tel }}</span>
                   <span>E-mail: {{ data.email }}</span>
                 </div>
                 <div class="work">
@@ -43,14 +41,14 @@
             <span v-if="!(this.nowpage == 1)">
               <li>
                 <router-link
-                  :to="`/person/person/page?name=${'first'}`"
+                  :to="`/ematesearch/person/page?name=${'first'}`"
                   class="btn btnPrev"
                   >처음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/person/person/page?name=${'prev'}`"
+                  :to="`/ematesearch/person/page?name=${'prev'}`"
                   class="btn btnPrev"
                   >이전
                 </router-link>
@@ -77,14 +75,14 @@
             >
               <li>
                 <router-link
-                  :to="`/person/person/page?name=${'next'}`"
+                  :to="`/ematesearch/person/page?name=${'next'}`"
                   class="btn btnNext"
                   >다음
                 </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/person/person/page?name=${'last'}`"
+                  :to="`/ematesearch/person/page?name=${'last'}`"
                   class="btn btnPrev"
                   >마지막
                 </router-link>
